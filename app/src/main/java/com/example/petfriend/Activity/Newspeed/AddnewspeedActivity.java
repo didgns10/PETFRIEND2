@@ -21,6 +21,7 @@ import com.example.petfriend.Model.Upload_newspeed_info;
 import com.example.petfriend.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -49,6 +50,20 @@ public class AddnewspeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 newspeed_info();
+            }
+        });
+        FloatingActionButton ft_bt_image = (FloatingActionButton) findViewById(R.id.ft_bt_image);
+        ft_bt_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        FloatingActionButton ft_bt_video = (FloatingActionButton) findViewById(R.id.ft_bt_video);
+        ft_bt_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
