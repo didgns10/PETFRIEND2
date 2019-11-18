@@ -15,35 +15,36 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:name="androidx.multidex.MultiDexApplication">
         <!--//로그인,회원가입-->
-        <activity android:name=".Activity.LodingActivity">
+        <activity android:name=".Activity.Login.LodingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.SignupActivity" ></activity>
-        <activity android:name=".Activity.Signup_MemberActivity"/>
-        <activity android:name=".Activity.IdpwActivity" />
+        <activity android:name=".Activity.Login.LoginActivity" />
+        <activity android:name=".Activity.Login.SignupActivity" ></activity>
+        <activity android:name=".Activity.Login.Signup_MemberActivity"/>
+        <activity android:name=".Activity.Login.IdpwActivity" />
 
 
         <activity android:name=".Activity.MainActivity" >
         </activity>
-        <activity android:name=".Activity.newspeedActivity" />
-        <activity android:name=".Activity.newspeed_photo_selectActivity" />
-        <activity android:name=".Activity.newspeed_photoActivity" />
-        <activity android:name=".Activity.myprofileActivity" />
-        <activity android:name=".Activity.myprofile_editActivity" />
-        <activity android:name=".Activity.optionActivity" />
-        <activity android:name=".Activity.likeActivity" />
+        <activity android:name=".Activity.Newspeed.newspeedActivity" />
+        <activity android:name=".Activity.Newspeed.AddnewspeedActivity"></activity>
+        <activity android:name=".Activity.Newspeed.newspeed_photo_selectActivity" />
+        <activity android:name=".Activity.Newspeed.newspeed_photoActivity" />
+        <activity android:name=".Activity.Menu.myprofileActivity" />
+        <activity android:name=".Activity.Menu.myprofile_editActivity" />
+        <activity android:name=".Activity.Menu.optionActivity" />
+        <activity android:name=".Activity.Menu.likeActivity" />
 
        <!-- //아이디어 부분-->
-        <activity android:name=".Activity.IdeaActivity">
+        <activity android:name=".Activity.Idea.IdeaActivity">
         </activity>
-        <activity android:name=".Activity.Idea_place_Acitivity"></activity>
-        <activity android:name=".Activity.Idea_pet_detail_Activity"/>
-        <activity android:name=".Activity.Idea_pet_Activity"/>
+        <activity android:name=".Activity.Idea.Idea_place_Acitivity"></activity>
+        <activity android:name=".Activity.Idea.Idea_pet_detail_Activity"/>
+        <activity android:name=".Activity.Idea.Idea_pet_Activity"/>
     </application>
 
 </manifest>

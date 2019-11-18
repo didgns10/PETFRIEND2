@@ -1,4 +1,4 @@
-package com.example.petfriend.Activity;
+package com.example.petfriend.Activity.Idea;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.petfriend.Activity;
+package com.example.petfriend.Activity.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.petfriend.Activity.Login.LoginActivity;
+import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.R;
 import com.google.firebase.auth.FirebaseAuth;
 

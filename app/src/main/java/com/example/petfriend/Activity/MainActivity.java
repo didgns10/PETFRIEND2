@@ -11,6 +11,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
+import com.example.petfriend.Activity.Idea.IdeaActivity;
+import com.example.petfriend.Activity.Login.LoginActivity;
+import com.example.petfriend.Activity.Login.Signup_MemberActivity;
+import com.example.petfriend.Activity.Menu.likeActivity;
+import com.example.petfriend.Activity.Menu.myprofileActivity;
+import com.example.petfriend.Activity.Menu.optionActivity;
+import com.example.petfriend.Activity.Newspeed.newspeedActivity;
+import com.example.petfriend.Activity.Newspeed.newspeed_photo_selectActivity;
 import com.example.petfriend.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -75,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent4 = new Intent(MainActivity.this, newspeedActivity.class);
                 intent4.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent4);
+                finish();
             }
         });
         // 정보주는 이미지 클릭했을때
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent4 = new Intent(MainActivity.this, IdeaActivity.class);
                 intent4.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent4);
+                finish();
             }
         });
 

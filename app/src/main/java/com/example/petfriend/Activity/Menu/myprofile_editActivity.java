@@ -1,4 +1,4 @@
-package com.example.petfriend.Activity;
+package com.example.petfriend.Activity.Menu;
 
 import android.content.Context;
 import android.content.Intent;

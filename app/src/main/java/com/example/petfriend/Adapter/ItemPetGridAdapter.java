@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.petfriend.Activity.Idea_pet_detail_Activity;
+import com.example.petfriend.Activity.Idea.Idea_pet_detail_Activity;
 import com.example.petfriend.Model.Pet;
 import com.example.petfriend.R;
 
