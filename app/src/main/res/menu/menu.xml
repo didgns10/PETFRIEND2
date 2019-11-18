@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/like_baguni"
+        android:title="관심 게시물"/>
+    <item android:id="@+id/my_profile"
+    android:title="나의 프로필"/>
+    <item android:id="@+id/option"
+        android:title="옵션"/>
+</menu>

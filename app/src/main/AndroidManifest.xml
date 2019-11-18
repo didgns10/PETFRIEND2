@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.petfriend">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name="androidx.multidex.MultiDexApplication">
+        <!--//로그인,회원가입-->
+        <activity android:name=".Activity.LodingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.SignupActivity" ></activity>
+        <activity android:name=".Activity.Signup_MemberActivity"/>
+        <activity android:name=".Activity.IdpwActivity" />
+
+
+        <activity android:name=".Activity.MainActivity" >
+        </activity>
+        <activity android:name=".Activity.newspeedActivity" />
+        <activity android:name=".Activity.newspeed_photo_selectActivity" />
+        <activity android:name=".Activity.newspeed_photoActivity" />
+        <activity android:name=".Activity.myprofileActivity" />
+        <activity android:name=".Activity.myprofile_editActivity" />
+        <activity android:name=".Activity.optionActivity" />
+        <activity android:name=".Activity.likeActivity" />
+
+       <!-- //아이디어 부분-->
+        <activity android:name=".Activity.IdeaActivity">
+        </activity>
+        <activity android:name=".Activity.Idea_place_Acitivity"></activity>
+        <activity android:name=".Activity.Idea_pet_detail_Activity"/>
+        <activity android:name=".Activity.Idea_pet_Activity"/>
+    </application>
+
+</manifest>

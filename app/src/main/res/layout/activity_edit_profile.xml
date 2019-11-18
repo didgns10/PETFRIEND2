@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme">
+
+    <ImageView
+        android:id="@+id/imageView_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="207dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:textColor="@color/colorPupple"
+        android:inputType="textPersonName"
+        android:text="회원정보수정"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView_background" />
+
+
+    <TextView
+        android:id="@+id/textView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="50dp"
+        android:text="아이디 :"
+        android:textColor="#090000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+    <EditText
+        android:id="@+id/editText_pw"
+        android:layout_width="225dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:textColor="#090000"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/textView53"
+        app:layout_constraintStart_toStartOf="@+id/textView53"
+        app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+    <TextView
+        android:id="@+id/textView_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:text="비밀번호 :"
+        android:textColor="#090000"
+        app:layout_constraintEnd_toEndOf="@+id/textView_id"
+        app:layout_constraintStart_toStartOf="@+id/textView_id"
+        app:layout_constraintTop_toBottomOf="@+id/textView_id" />
+
+    <EditText
+        android:id="@+id/editText_repw"
+        android:layout_width="225dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:textColor="#090000"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editText_pw"
+        app:layout_constraintStart_toStartOf="@+id/editText_pw"
+        app:layout_constraintTop_toBottomOf="@+id/editText_pw" />
+
+    <TextView
+        android:id="@+id/textView_repw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="비밀번호 확인 :"
+        android:textColor="#090000"
+        app:layout_constraintEnd_toEndOf="@+id/textView_pw"
+        app:layout_constraintStart_toStartOf="@+id/textView_pw"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pw" />
+
+    <EditText
+        android:id="@+id/editText_phonenum"
+        android:layout_width="225dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="010-xxxx-xxxx"
+        android:inputType="phone"
+        android:textColor="#090000"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/editText_repw"
+        app:layout_constraintStart_toStartOf="@+id/editText_repw"
+        app:layout_constraintTop_toBottomOf="@+id/editText_repw" />
+
+    <TextView
+        android:id="@+id/textView_phonenum"
+        android:layout_width="67dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="60dp"
+        android:text="전화번호 :"
+        android:textColor="#090000"
+        app:layout_constraintEnd_toEndOf="@+id/textView_repw"
+        app:layout_constraintStart_toStartOf="@+id/textView_repw"
+        app:layout_constraintTop_toBottomOf="@+id/textView_repw" />
+
+    <TextView
+        android:id="@+id/textView_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="닉네임 :"
+        android:textColor="#090000"
+        app:layout_constraintEnd_toEndOf="@+id/textView_phonenum"
+        app:layout_constraintStart_toStartOf="@+id/textView_phonenum"
+        app:layout_constraintTop_toBottomOf="@+id/textView_phonenum" />
+
+    <Button
+        android:id="@+id/button_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPupple"
+        android:text="수정완료"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="225dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="40dp"
+        android:text="djdndskdndksm10"
+        android:textColor="#FA030000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView_id"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+    <TextView
+        android:id="@+id/textView57"
+        android:layout_width="225dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="50dp"
+        android:text="양갱아빠"
+        android:textColor="#0A0101"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/editText_phonenum"
+        app:layout_constraintStart_toStartOf="@+id/editText_phonenum"
+        app:layout_constraintTop_toBottomOf="@+id/editText_phonenum" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

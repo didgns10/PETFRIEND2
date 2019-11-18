@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme">
+
+    <ImageView
+        android:id="@+id/imageView_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="회원정보입력"
+        android:textColor="@color/colorPupple"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_signup_member_nick"
+        android:layout_width="225dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="닉네임을 입력해주세요"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.827"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_title" />
+
+
+    <TextView
+        android:id="@+id/textView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="50dp"
+        android:text="닉네임 :"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_title" />
+
+    <EditText
+        android:id="@+id/editText_signup_member_phone"
+        android:layout_width="225dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="'-' 없이 전화번호를 입력해주세요"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:inputType="phone"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/editText_signup_member_nick"
+        app:layout_constraintTop_toBottomOf="@id/editText_signup_member_nick" />
+
+    <TextView
+        android:id="@+id/textView_phonenum"
+        android:layout_width="67dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="60dp"
+        android:text="전화번호 :"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/textView_id"
+        app:layout_constraintStart_toStartOf="@+id/textView_id"
+        app:layout_constraintTop_toBottomOf="@+id/textView_id" />
+
+    <EditText
+        android:id="@+id/editText_signup_member_address"
+        android:layout_width="225dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="주소를 입력해주세요"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/editText_signup_member_phone"
+        app:layout_constraintStart_toStartOf="@id/editText_signup_member_phone"
+        app:layout_constraintTop_toBottomOf="@id/editText_signup_member_phone" />
+
+    <TextView
+        android:id="@+id/textView_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="주소 :"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/textView_phonenum"
+        app:layout_constraintStart_toStartOf="@+id/textView_phonenum"
+        app:layout_constraintTop_toBottomOf="@+id/textView_phonenum" />
+
+    <Button
+        android:id="@+id/button_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="회원가입"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
