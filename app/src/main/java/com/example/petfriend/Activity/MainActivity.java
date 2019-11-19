@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent4 = new Intent(MainActivity.this, newspeedActivity.class);
                 intent4.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent4);
-                finish();
+
             }
         });
         // 정보주는 이미지 클릭했을때
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent4 = new Intent(MainActivity.this, IdeaActivity.class);
                 intent4.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent4);
-                finish();
+
             }
         });
 
