@@ -39,7 +39,6 @@ public class myprofile_editActivity extends AppCompatActivity {
 
 
         //버튼에대한 선언들
-        Button button_profileback = (Button)findViewById(R.id.button_profileback);
         Button button_nick = (Button)findViewById(R.id.button_nick);
         Button button_self = (Button)findViewById(R.id.button_self);
         Button button_profile = (Button)findViewById(R.id.button_profile);
@@ -82,20 +81,10 @@ public class myprofile_editActivity extends AppCompatActivity {
         }
         // 사진에 저장 된 이미지 불러오기
         try{
-            ImageView imgview = (ImageView)findViewById(R.id.imageView_profile_back);
+            ImageView imgview = (ImageView)findViewById(R.id.imageView_profile);
             String imgpath = "data/data/com.example.petfriend/files/profile_back.png";
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             Bitmap resize_bitmap = Bitmap.createScaledBitmap(bm, 405, 267, true);
-            imgview.setImageBitmap(resize_bitmap);
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        try{
-            ImageView imgview = (ImageView)findViewById(R.id.imageView_profile);
-            String imgpath = "data/data/com.example.petfriend/files/profile.png";
-            Bitmap bm = BitmapFactory.decodeFile(imgpath);
-            Bitmap resize_bitmap = Bitmap.createScaledBitmap(bm, 98, 94, true);
             imgview.setImageBitmap(resize_bitmap);
 
         }catch(Exception e){
@@ -107,22 +96,7 @@ public class myprofile_editActivity extends AppCompatActivity {
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(myprofile_editActivity.this, myprofileActivity.class);
-                startActivity(intent);
                 finish();
-            }
-        });
-
-
-        //프로필 배경 이미지설정
-        button_profileback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent 생성
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT); //ACTION_PIC과 차이점?
-                intent.setType("image/*"); //이미지만 보이게
-                //Intent 시작 - 갤러리앱을 열어서 원하는 이미지를 선택할 수 있다.
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
             }
         });
 
@@ -134,7 +108,7 @@ public class myprofile_editActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT); //ACTION_PIC과 차이점?
                 intent.setType("image/*"); //이미지만 보이게
                 //Intent 시작 - 갤러리앱을 열어서 원하는 이미지를 선택할 수 있다.
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST1);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
             }
         });
 
@@ -201,7 +175,7 @@ public class myprofile_editActivity extends AppCompatActivity {
                 //  불러온 이미지 저장
                 try{
 
-                    ImageView imgview = (ImageView)findViewById(R.id.imageView_profile_back);
+                    ImageView imgview = (ImageView)findViewById(R.id.imageView_profile);
                     imgview.setImageBitmap(resize_bitmap);
 
                     File file = new File("profile_back.png");
@@ -215,33 +189,6 @@ public class myprofile_editActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-            }
-            else if(requestCode == PICK_IMAGE_REQUEST1 && resultCode == RESULT_OK && null != data){
-                //data에서 절대경로로 이미지를 가져옴
-                Uri uri = data.getData();
-
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                //이미지가 한계이상(?) 크면 불러 오지 못하므로 사이즈를 줄여 준다.
-                int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
-                Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 1024, nh, true);
-                Bitmap resize_bitmap = Bitmap.createScaledBitmap(scaled, 98, 94, true);
-
-                //  불러온 이미지 저장
-                try{
-
-                    ImageView imgview = (ImageView)findViewById(R.id.imageView_profile);
-                    imgview.setImageBitmap(resize_bitmap);
-
-                    File file = new File("profile.png");
-                    FileOutputStream fos = openFileOutput("profile.png" , 0);
-                    scaled.compress(Bitmap.CompressFormat.PNG, 100 , fos);
-                    fos.flush();
-                    fos.close();
-
-
-                }catch(Exception e) {
-                    e.printStackTrace();
-                }
             }
             else {
                 Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_LONG).show();

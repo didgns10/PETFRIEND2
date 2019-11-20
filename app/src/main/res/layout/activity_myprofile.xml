@@ -9,13 +9,13 @@
         android:id="@+id/imageView_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@color/colorPrimary" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/imageButton_back"
@@ -42,35 +42,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView_profile"
-        android:layout_width="98dp"
-        android:layout_height="94dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView_background"
-        app:layout_constraintTop_toBottomOf="@id/imageView_profile_back"
-        app:srcCompat="@drawable/human" />
-
     <TextView
         android:id="@+id/textView_nick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="양갱아빠"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView_profile" />
+        app:layout_constraintTop_toBottomOf="@id/cardView" />
 
     <LinearLayout
+        android:id="@+id/linearLayout11"
         android:layout_width="407dp"
         android:layout_height="101dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/customerborder"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/layout_myprofile_edit"
@@ -129,12 +122,13 @@
     <LinearLayout
         android:id="@+id/linearLayout10"
         android:layout_width="0dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_nick">
+        app:layout_constraintTop_toBottomOf="@+id/textView_nick">
 
         <TextView
             android:id="@+id/textView_self"
@@ -145,15 +139,23 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView_profile_back"
-        android:layout_width="405dp"
-        android:layout_height="227dp"
-        android:layout_marginTop="64dp"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gang1" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_repw">
+
+        <ImageView
+            android:id="@+id/imageView_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/imageButton_send"

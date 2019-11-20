@@ -523,7 +523,7 @@ public class Camera2BasicFragment extends Fragment
      * @param height The height of available size for camera preview
      */
     @SuppressWarnings("SuspiciousNameCombination")
-    private void setUpCameraOutputs(int width, int height, int facingid) {
+    private void setUpCameraOutputs(int width, int height) {
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -649,7 +649,7 @@ public class Camera2BasicFragment extends Fragment
             requestCameraPermission();
             return;
         }
-        setUpCameraOutputs(width, height, facingid); //CameraCharacteristics.LENS_FACING_FRONT
+        setUpCameraOutputs(width, height); //CameraCharacteristics.LENS_FACING_FRONT
         configureTransform(width, height);
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);

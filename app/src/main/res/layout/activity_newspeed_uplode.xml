@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/imageView_background"
-            android:layout_width="422dp"
-            android:layout_height="798dp"
+            android:layout_width="0dp"
+            android:layout_height="724dp"
             android:background="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

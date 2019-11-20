@@ -5,15 +5,27 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.example.petfriend.Activity.Login.Signup_MemberActivity;
 import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,10 +33,43 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class myprofileActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myprofile);
+        final TextView textView_nick = (TextView)findViewById(R.id.textView_nick);
+        final ImageView imageView_profile = (ImageView)findViewById(R.id.imageView_profile);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final DocumentReference docRef = FirebaseFirestore.getInstance().collection("users").document(user.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if(document != null) {
+                        if (document.exists()) {
+                            if(document.getData().get("photoUrl") != null){
+
+                                Glide.with(myprofileActivity.this).load(document.getData().get("photoUrl")).centerCrop().override(500).into(imageView_profile);
+                            }
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            textView_nick.setText(document.getData().get("nickname").toString());
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+
+            }
+        });
 
         //자기소개 글 저장 하기
         TextView textView=(TextView)findViewById(R.id.textView_self);
@@ -44,47 +89,7 @@ public class myprofileActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // 닉네임 저장하기
-        TextView textView1=(TextView)findViewById(R.id.textView_nick);
-        try {
-            // 파일에서 읽은 데이터를 저장하기 위해서 만든 변수
-            StringBuffer data1 = new StringBuffer();
-            FileInputStream fis = openFileInput("nick.txt");//파일명
-            BufferedReader buffer = new BufferedReader
-                    (new InputStreamReader(fis));
-            String str1 = buffer.readLine(); // 파일에서 한줄을 읽어옴
-            while (str1 != null) {
-                data1.append(str1 + "");
-                str1 = buffer.readLine();
-            }
-            textView1.setText(data1);
-            buffer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        // 프로필 배경 사진 저장하기
-        try{
-            ImageView imgview = (ImageView)findViewById(R.id.imageView_profile_back);
-            String imgpath = "data/data/com.example.petfriend/files/profile_back.png";
-            Bitmap bm = BitmapFactory.decodeFile(imgpath);
-            Bitmap resize_bitmap = Bitmap.createScaledBitmap(bm, 405, 227, true);
-            imgview.setImageBitmap(resize_bitmap);
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        // 프로필 사진 저장하기
-        try{
-            ImageView imgview = (ImageView)findViewById(R.id.imageView_profile);
-            String imgpath = "data/data/com.example.petfriend/files/profile.png";
-            Bitmap bm = BitmapFactory.decodeFile(imgpath);
-            Bitmap resize_bitmap = Bitmap.createScaledBitmap(bm, 98, 94, true);
-            imgview.setImageBitmap(resize_bitmap);
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
         //뒤로가기 화면 전환
         ImageButton button_back = (ImageButton) findViewById(R.id.imageButton_back);
@@ -110,25 +115,18 @@ public class myprofileActivity extends AppCompatActivity {
         button_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                String imagePath = "data/data/com.example.petfriend/files/profile_back.png";
+
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("image/*");
+
+                String imagePath =  "sdcard/Android/data/com.example.petfriend/files/profileImage.jpg";;
                 File imageFileToShare = new File(imagePath);
                 Uri uri = Uri.fromFile(imageFileToShare);
-                intent.putExtra(Intent.EXTRA_STREAM, uri);*/
+                share.putExtra(Intent.EXTRA_STREAM, uri);
 
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.setType("image/*");
+                startActivity(Intent.createChooser(share, "Share image to..."));
+                }
 
-                Uri uri = Uri.fromFile(new File("data/data/com.example.petfriend/files/profile_back.png"));
-                intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
-                intent.putExtra(android.content.Intent.EXTRA_TEXT, "");
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
-                startActivity(Intent.createChooser(intent, "Share Screenshot"));
-
-
-            }
         });
 
 

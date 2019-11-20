@@ -34,7 +34,7 @@
         android:id="@+id/editText_signup_member_nick"
         android:layout_width="225dp"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="닉네임을 입력해주세요"
         android:inputType="textEmailAddress"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.827"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView_button" />
 
 
     <TextView
@@ -52,11 +52,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="닉네임 :"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView_button" />
 
     <EditText
         android:id="@+id/editText_signup_member_phone"
@@ -114,11 +114,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/colorPupple"
         android:text="회원가입"
         android:textColor="#FFFFFF"
+
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -143,14 +143,53 @@
         app:cardCornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_title" >
+        app:layout_constraintTop_toBottomOf="@+id/textView_title">
 
         <ImageView
             android:id="@+id/imageView_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/gang1" />
+            app:srcCompat="@mipmap/ic_launcher" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="17dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_sign_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorPupple"
+                android:text="갤러리"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/bt_sign_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorPupple"
+                android:text="카메라"
+                android:textSize="18sp" />
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 
