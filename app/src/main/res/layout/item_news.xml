@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <!-- A CardView that contains a TextView -->
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        card_view:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            android:background="#ffffff"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/ImageView_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_launcher_background"
+                    />
+
+                <TextView
+                    android:id="@+id/TextView_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#12000000"
+                    android:gravity="center"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="text"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+            </RelativeLayout>
+
+            <TextView
+
+                android:id="@+id/TextView_content"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:ellipsize="end"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="text"
+                android:maxLines="2"
+                android:textSize="12sp">//글자를 보여주다가 칸이부족하면 ...으로 보여줄게
+            </TextView>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
