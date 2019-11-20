@@ -132,4 +132,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_create" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_newspeed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_repw" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

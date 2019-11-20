@@ -25,7 +25,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
         android:text="핫 플레이스"
-        android:textColor="#030000"
+        android:textColor="@color/colorPupple"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView_pet" />
@@ -126,7 +126,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
         android:text="PET 정보"
-        android:textColor="#000000"
+        android:textColor="@color/colorPupple"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_home" />

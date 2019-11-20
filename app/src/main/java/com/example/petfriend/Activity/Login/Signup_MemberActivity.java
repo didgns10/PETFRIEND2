@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -99,7 +100,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Signup_MemberActivity.this, CameraActivity.class);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -136,10 +137,23 @@ public class Signup_MemberActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 0: {
-                if (resultCode == Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
                     profilePath = data.getStringExtra("profilePath");
                     Bitmap bmp = BitmapFactory.decodeFile(profilePath);
                     profile_image.setImageBitmap(bmp);
+                }
+            }
+                break;
+
+            case 1: {
+                if (resultCode == Activity.RESULT_OK) {
+                    profilePath = data.getStringExtra("profilePath");
+                    Bitmap bmp = BitmapFactory.decodeFile(profilePath);
+                    //카메라 회전 시켜주는 작업
+                    Matrix matrix = new Matrix();
+                    matrix.setRotate(90);
+                    Bitmap bmp1 = Bitmap.createBitmap(bmp,0,0,bmp.getWidth(),bmp.getHeight(),matrix,true);
+                    profile_image.setImageBitmap(bmp1);
                 }
                 break;
             }

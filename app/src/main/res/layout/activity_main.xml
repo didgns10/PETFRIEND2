@@ -92,153 +92,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        android:text="가장 인기 있는 게시물"
+        android:text="최신 뉴스"
         android:textColor="#090000"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_home" />
-
-    <ImageView
-        android:id="@+id/imageView_like1"
-        android:layout_width="120dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_repw"
-        app:srcCompat="@drawable/miho1" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="120dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageView_like1"
-        app:layout_constraintTop_toBottomOf="@+id/textView_repw"
-        app:srcCompat="@drawable/gang" />
-
-    <ImageView
-        android:id="@+id/imageView_like4"
-        android:layout_width="120dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="60dp"
-        android:onClick="image_like4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8"
-        app:srcCompat="@drawable/gang1" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="120dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView_like1"
-        app:srcCompat="@drawable/miho3" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
-        android:text="간식주세요"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="해맑아요"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@id/imageView_like4" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
-        android:text="미호랑 꽃이랑"
-        android:textColor="#090000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView_like1" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="81dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
-        android:text="왜 이제왔으"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="좋아요 10000"
-        android:textColor="#090000"
-        app:layout_constraintEnd_toEndOf="@+id/textView12"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="좋아요 8000"
-        app:layout_constraintEnd_toEndOf="@+id/textView13"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="좋아요 6000"
-        app:layout_constraintEnd_toEndOf="@+id/textView14"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="좋아요 5000"
-        app:layout_constraintEnd_toEndOf="@+id/textView15"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <ImageButton
-        android:id="@+id/imageButton_chat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/chat" />
 
     <ImageButton
         android:id="@+id/imageButton_menu"
@@ -260,5 +119,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/search" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/float_chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_repw" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:backgroundTint="@color/colorPupple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
