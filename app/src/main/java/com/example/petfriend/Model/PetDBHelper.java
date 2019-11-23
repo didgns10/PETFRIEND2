@@ -124,7 +124,7 @@ public class PetDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL("DELETE FROM "+TABLE_NAME+" WHERE _id='"+id+"'");
-        Toast.makeText(context, "Deleted successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
     }
 

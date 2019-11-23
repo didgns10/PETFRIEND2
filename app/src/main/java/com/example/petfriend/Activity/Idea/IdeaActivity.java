@@ -3,6 +3,8 @@ package com.example.petfriend.Activity.Idea;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageButton;
 
 import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Activity.Newspeed.newspeedActivity;
+import com.example.petfriend.Model.PetDBHelper;
 import com.example.petfriend.R;
 
 public class IdeaActivity extends AppCompatActivity {
@@ -35,8 +38,30 @@ public class IdeaActivity extends AppCompatActivity {
         cardView_place.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IdeaActivity.this, Idea_place_Acitivity.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(IdeaActivity.this);
+                builder.setTitle("화면을 선택하세요.");
+                builder.setMessage("관리자모드 또는 일반모드");
+                builder.setPositiveButton("관리자모드", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(IdeaActivity.this, Idea_place_set_Activity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNeutralButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("일반모드", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(IdeaActivity.this, Idea_place_Acitivity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.create().show();
             }
         });
 

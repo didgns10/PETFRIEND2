@@ -3,8 +3,8 @@
 
     <string-array name="filterOptions">
         <item></item>
-        <item>Name</item>
-        <item>Elevation</item>
-        <item>Location</item>
+        <item>title</item>
+        <item>time</item>
+        <item>content</item>
     </string-array>
 </resources>

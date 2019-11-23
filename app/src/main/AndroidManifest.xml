@@ -20,7 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.Idea.Idea_PetAddActivity"></activity>
+        <activity android:name=".Activity.Menu.Diary_detail_Activity"></activity>
+        <activity android:name=".Activity.Menu.Diary_Update_Activity" />
+        <activity android:name=".Activity.Menu.Diary_Add_Activity" />
+        <activity android:name=".Activity.Menu.Diary_Activity" />
+        <activity android:name=".Activity.Idea.Idea_place_set_Activity" />
+        <activity android:name=".Activity.Idea.Idea_PlaceUpdate_Activity" />
+        <activity android:name=".Activity.Idea.Idea_PlaceAdd_Activity" />
+        <activity android:name=".Activity.Idea.Idea_PetAddActivity" />
         <activity android:name=".Activity.Idea.Idea_PetUpdateActivity" /> <!-- //로그인,회원가입 -->
         <activity android:name=".Activity.Login.LodingActivity">
             <intent-filter>

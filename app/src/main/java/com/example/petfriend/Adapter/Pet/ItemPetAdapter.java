@@ -91,8 +91,8 @@ public class ItemPetAdapter extends RecyclerView.Adapter<ItemPetAdapter.PetViewH
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("옵션을 선택하세요");
-                builder.setMessage("업데이트나 데이터 삭제를 하시겠습니까?");
+                builder.setTitle("옵션을 선택하세요.");
+                builder.setMessage("업데이트 또는 데이터 삭제를 하시겠습니까?");
                 builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -109,7 +109,7 @@ public class ItemPetAdapter extends RecyclerView.Adapter<ItemPetAdapter.PetViewH
                         dbHelper.deletePetRecord(pet.getId(), context);
 
                         listPet.remove(position);
-                        mRecyclerV.removeViewAt(position);
+                       // mRecyclerV.removeViewAt(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, listPet.size());
                         notifyDataSetChanged();

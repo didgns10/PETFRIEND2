@@ -11,16 +11,22 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.petfriend.Adapter.ItemPlaceAdapter;
+import com.example.petfriend.Adapter.Place.ItemPlaceAdapter;
+import com.example.petfriend.Adapter.Place.ItemPlaceSetAdapter;
 import com.example.petfriend.Model.Place;
-import com.example.petfriend.Model.PlaceData;
+import com.example.petfriend.Model.PlaceDBHelper;
 import com.example.petfriend.R;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Idea_place_Acitivity extends AppCompatActivity {
 
-    private ArrayList<Place> petlist;
+    private RecyclerView recyclerView ;
+    private List<Place> placeList;
+    private ItemPlaceAdapter placeAdapter;
+    private String filter = "";
+    private PlaceDBHelper dbHelper;
 
 
 
@@ -34,11 +40,11 @@ public class Idea_place_Acitivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
 
-        petlist = new ArrayList<>();
-        petlist.addAll(PlaceData.getListData());
-
-        final ItemPlaceAdapter mAdapter = new ItemPlaceAdapter(this,petlist);
-        mRecyclerView.setAdapter(mAdapter);
+        placeList = new LinkedList<>();
+       // placeList.addAll(PlaceData.getListData());
+        dbHelper = new PlaceDBHelper(this);
+        placeAdapter = new ItemPlaceAdapter(this,dbHelper.placeList(filter),recyclerView);
+        mRecyclerView.setAdapter(placeAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
@@ -58,7 +64,7 @@ public class Idea_place_Acitivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String All = "";
-                mAdapter.getFilter().filter(All);
+                placeAdapter.getFilter().filter(All);
             }
         });
 
@@ -67,7 +73,7 @@ public class Idea_place_Acitivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Cafe = "카페";
-                mAdapter.getFilter().filter(Cafe);
+                placeAdapter.getFilter().filter(Cafe);
             }
         });
         Button Hos_bt = (Button)findViewById(R.id.button_hospital);
@@ -75,7 +81,7 @@ public class Idea_place_Acitivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Cafe = "병원";
-                mAdapter.getFilter().filter(Cafe);
+                placeAdapter.getFilter().filter(Cafe);
             }
         });
         Button Park_bt = (Button)findViewById(R.id.button_park);
@@ -83,9 +89,14 @@ public class Idea_place_Acitivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Cafe = "공원";
-                mAdapter.getFilter().filter(Cafe);
+                placeAdapter.getFilter().filter(Cafe);
             }
         });
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        placeAdapter.notifyDataSetChanged();
     }
 }

@@ -3,13 +3,23 @@ package com.example.petfriend.Model;
 public class Place {
 
     private String name,category, photo, location, url;
+    private long id;
 
+    public Place(){ }
     public Place(String name, String category, String photo, String location, String url) {
         this.name = name;
         this.category = category;
         this.photo = photo;
         this.location = location;
         this.url = url;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

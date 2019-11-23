@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.petfriend.Activity.Idea.IdeaActivity;
 import com.example.petfriend.Activity.Login.LoginActivity;
 import com.example.petfriend.Activity.Login.Signup_MemberActivity;
+import com.example.petfriend.Activity.Menu.Diary_Activity;
 import com.example.petfriend.Activity.Menu.likeActivity;
 import com.example.petfriend.Activity.Menu.myprofileActivity;
 import com.example.petfriend.Activity.Menu.optionActivity;
@@ -133,9 +134,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
-                            case R.id.like_baguni:
-                                Intent intent = new Intent(MainActivity.this, likeActivity.class);
+                            case R.id.diary:
+                                Intent intent = new Intent(MainActivity.this, Diary_Activity.class);
                                 startActivity(intent);
+                                break;
+                            case R.id.like_baguni:
+                                Intent intent3 = new Intent(MainActivity.this, likeActivity.class);
+                                startActivity(intent3);
                                 break;
                             case R.id.my_profile:
                                 Intent intent1 = new Intent(MainActivity.this, myprofileActivity.class);
