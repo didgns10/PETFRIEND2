@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_pet"
+        android:title="추가,수정,삭제"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/action_list"
         android:title="List Mode"
         app:showAsAction="never"/>

@@ -1,4 +1,4 @@
-package com.example.petfriend.Adapter;
+package com.example.petfriend.Adapter.Pet;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,21 +18,25 @@ import com.example.petfriend.Model.Pet;
 import com.example.petfriend.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemPetCardViewAdapter extends RecyclerView.Adapter<ItemPetCardViewAdapter.CardViewHolder> {
 
     private Context context;
-    private ArrayList<Pet> listMountain;
+    private List<Pet> listMountain;
+    private RecyclerView mRecyclerV;
 
-    public ItemPetCardViewAdapter(Context context) {
+    public ItemPetCardViewAdapter(Context context, List<Pet> listMountain, RecyclerView mRecyclerV) {
         this.context = context;
+        this.listMountain = listMountain;
+        this.mRecyclerV = mRecyclerV;
     }
 
-    public ArrayList<Pet> getListMountain() {
+    public List<Pet> getListMountain() {
         return listMountain;
     }
 
-    public void setListMountain(ArrayList<Pet> listMountain) {
+    public void setListMountain(List<Pet> listMountain) {
         this.listMountain = listMountain;
     }
 

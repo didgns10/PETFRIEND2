@@ -7,6 +7,18 @@ public class Pet implements Parcelable {
 
     //이름, 수명 , 사진, 설명, 원산지
     private String name, elevation, photo, description, location;
+    private long id;
+
+    public Pet(){
+    }
+
+    public Pet(String name, String elevation, String photo, String description, String location) {
+        this.name = name;
+        this.elevation = elevation;
+        this.photo = photo;
+        this.description = description;
+        this.location = location;
+    }
 
     protected Pet(Parcel in) {
         name = in.readString();
@@ -27,6 +39,14 @@ public class Pet implements Parcelable {
             return new Pet[size];
         }
     };
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -68,8 +88,6 @@ public class Pet implements Parcelable {
         this.location = location;
     }
 
-    public Pet(){
-    }
 
     @Override
     public int describeContents() {
