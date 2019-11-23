@@ -73,38 +73,21 @@ public class Idea_PetUpdateActivity extends AppCompatActivity {
         String location = et_location.getText().toString().trim();
 
 
-        if(name.isEmpty()){
+        if(name.isEmpty() && elevation.isEmpty() && photo.isEmpty() && description.isEmpty() && location.isEmpty()){
             //error name is empty
-            Toast.makeText(this, "You must enter a name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "빈칸 없이 채워주세요", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            //create new person
+            Pet updatedPet = new Pet(name, elevation, photo, description,location);
+
+            dbHelper.updatePetRecord(receivedPetId, this, updatedPet);
+
+            //finally redirect back home
+            // NOTE you can implement an sqlite callback then redirect on success delete
+            goBackHome();
         }
 
-        if(elevation.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "You must enter an elevation", Toast.LENGTH_SHORT).show();
-        }
-
-        if(photo.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "You must enter an image link", Toast.LENGTH_SHORT).show();
-        }
-
-        if(description.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "You must enter a description", Toast.LENGTH_SHORT).show();
-        }
-        if(location.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "You must enter a location", Toast.LENGTH_SHORT).show();
-        }
-
-        //create new person
-        Pet updatedPet = new Pet(name, elevation, photo, description,location);
-
-        dbHelper.updatePetRecord(receivedPetId, this, updatedPet);
-
-        //finally redirect back home
-        // NOTE you can implement an sqlite callback then redirect on success delete
-        goBackHome();
 
     }
 

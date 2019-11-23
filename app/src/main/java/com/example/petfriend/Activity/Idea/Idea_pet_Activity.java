@@ -7,14 +7,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetCardViewAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetGridAdapter;
@@ -23,11 +20,9 @@ import com.example.petfriend.Adapter.Pet.ItemPetListAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetListVisibleAdapter;
 import com.example.petfriend.Model.Pet;
 import com.example.petfriend.Model.PetDBHelper;
-import com.example.petfriend.Model.PetData;
 import com.example.petfriend.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

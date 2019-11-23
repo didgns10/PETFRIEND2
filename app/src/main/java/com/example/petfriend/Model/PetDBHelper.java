@@ -133,7 +133,7 @@ public class PetDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         //you can use the constants above instead of typing the column names
         db.execSQL("UPDATE  "+TABLE_NAME+" SET name ='"+ updatePet.getName() + "', elevation ='" + updatePet.getElevation()+ "', photo ='"+ updatePet.getPhoto() + "', description ='"+ updatePet.getDescription() + "' , location ='"+ updatePet.getLocation() + "' WHERE _id='" + mountainId + "'");
-        Toast.makeText(context, "Updated successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "업데이트가 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
 
     }
