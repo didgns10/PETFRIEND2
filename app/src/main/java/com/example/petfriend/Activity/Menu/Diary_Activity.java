@@ -57,6 +57,7 @@ public class Diary_Activity extends AppCompatActivity {
         diaryList = new LinkedList<>();
         populaterecyclerView(filter);
 
+
         FloatingActionButton bt_plus = (FloatingActionButton)findViewById(R.id.bt_plus);
         bt_plus.setOnClickListener(new View.OnClickListener() {
             @Override

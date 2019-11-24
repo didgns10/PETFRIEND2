@@ -23,6 +23,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.Camera.CameraActivity;
 import com.example.petfriend.Activity.Camera.GalleryActivity;
 import com.example.petfriend.Activity.MainActivity;
@@ -139,8 +140,9 @@ public class Signup_MemberActivity extends AppCompatActivity {
             case 0: {
                 if (resultCode == Activity.RESULT_OK) {
                     profilePath = data.getStringExtra("profilePath");
-                    Bitmap bmp = BitmapFactory.decodeFile(profilePath);
-                    profile_image.setImageBitmap(bmp);
+                    Glide.with(this).load(profilePath).centerCrop().override(500).into(profile_image);
+                  //  Bitmap bmp = BitmapFactory.decodeFile(profilePath);
+                 //   profile_image.setImageBitmap(bmp);
                 }
             }
                 break;

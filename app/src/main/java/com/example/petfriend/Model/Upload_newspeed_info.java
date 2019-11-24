@@ -1,13 +1,27 @@
 package com.example.petfriend.Model;
 
-public class Upload_newspeed_info {
-    private String title, content;
-    private String publisher;
+import java.util.ArrayList;
+import java.util.Date;
 
-    public Upload_newspeed_info(String title, String content, String publisher) {
+public class Upload_newspeed_info {
+    private String title;
+    private ArrayList<String> content;
+    private String publisher;
+    private Date createdAt;
+
+    public Upload_newspeed_info(String title, ArrayList<String> content, String publisher, Date createdAt) {
         this.title = title;
         this.content = content;
         this.publisher = publisher;
+        this.createdAt = createdAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getTitle() {
@@ -26,11 +40,11 @@ public class Upload_newspeed_info {
         this.title = title;
     }
 
-    public String getContent() {
+    public ArrayList<String> getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(ArrayList<String> content) {
         this.content = content;
     }
 }
