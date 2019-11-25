@@ -32,7 +32,6 @@ public class Idea_place_Acitivity extends AppCompatActivity {
     private ArrayList<Place> placeList;
     private ItemPlaceAdapter placeAdapter;
     private String filter = "";
-    private PlaceDBHelper dbHelper;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
 
