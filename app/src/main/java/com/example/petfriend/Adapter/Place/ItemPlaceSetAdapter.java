@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,19 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.petfriend.Activity.Idea.Idea_PetUpdateActivity;
 import com.example.petfriend.Activity.Idea.Idea_PlaceUpdate_Activity;
-import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
-import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.Model.Place;
-import com.example.petfriend.Model.PlaceDBHelper;
 import com.example.petfriend.Model.PlaceFireDBHelper;
 import com.example.petfriend.R;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class ItemPlaceSetAdapter  {
     private Context mContext;

@@ -9,11 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
-import com.example.petfriend.Adapter.Pet.ItemPetCardViewAdapter;
 import com.example.petfriend.Adapter.Place.ItemPlaceSetAdapter;
 import com.example.petfriend.Model.Place;
-import com.example.petfriend.Model.PlaceDBHelper;
 import com.example.petfriend.Model.PlaceFireDBHelper;
 import com.example.petfriend.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Idea_place_set_Activity extends AppCompatActivity {
 

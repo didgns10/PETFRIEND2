@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.petfriend.Activity.Idea.Idea_PlaceUpdate_Activity;
-import com.example.petfriend.Activity.Idea.Idea_pet_detail_Activity;
 import com.example.petfriend.Activity.Menu.Diary_Update_Activity;
 import com.example.petfriend.Activity.Menu.Diary_detail_Activity;
 import com.example.petfriend.Model.Diary;
 import com.example.petfriend.Model.DiaryDBHelper;
-import com.example.petfriend.Model.Place;
-import com.example.petfriend.Model.PlaceDBHelper;
 import com.example.petfriend.R;
 
 import java.util.List;

@@ -18,12 +18,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.Camera.GalleryActivity;
-import com.example.petfriend.Activity.Idea.Idea_PlaceUpdate_Activity;
-import com.example.petfriend.Activity.Idea.Idea_place_set_Activity;
 import com.example.petfriend.Model.Diary;
 import com.example.petfriend.Model.DiaryDBHelper;
-import com.example.petfriend.Model.Place;
-import com.example.petfriend.Model.PlaceDBHelper;
 import com.example.petfriend.R;
 
 public class Diary_Update_Activity extends AppCompatActivity {

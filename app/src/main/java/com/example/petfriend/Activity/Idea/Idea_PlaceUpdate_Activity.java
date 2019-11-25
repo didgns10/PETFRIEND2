@@ -9,10 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.Model.Place;
-import com.example.petfriend.Model.PlaceDBHelper;
 import com.example.petfriend.Model.PlaceFireDBHelper;
 import com.example.petfriend.R;
 

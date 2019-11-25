@@ -11,20 +11,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.petfriend.Adapter.Pet.ItemPetCardViewAdapter;
-import com.example.petfriend.Adapter.Pet.ItemPetListAdapter;
 import com.example.petfriend.Adapter.Place.ItemPlaceAdapter;
-import com.example.petfriend.Adapter.Place.ItemPlaceSetAdapter;
-import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.Model.Place;
-import com.example.petfriend.Model.PlaceDBHelper;
 import com.example.petfriend.Model.PlaceFireDBHelper;
 import com.example.petfriend.R;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Idea_place_Acitivity extends AppCompatActivity {
 
