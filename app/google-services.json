@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "264898584543-96i5r7mucoalg7haagm7igav8prg8bb5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petfriend",
+            "certificate_hash": "3aec8348be85661f3866cd122bbecc7fbbd9e6c8"
+          }
+        },
+        {
           "client_id": "264898584543-ima5ubnrejafkitmh7jea68soglpjgrp.apps.googleusercontent.com",
           "client_type": 3
         }

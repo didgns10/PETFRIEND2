@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,10 +20,13 @@ import com.example.petfriend.R;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class ItemPetListAdapter extends RecyclerView.Adapter<ItemPetListAdapter.ListViewHolder> {
 
-    private Context context;
-    private List<Pet> listMountain;
+    private Context mcontext;
+    private ArrayList<Pet> listMountain;
+    private ArrayList<String> mkeys;
     private RecyclerView mRecyclerV;
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
@@ -39,17 +43,16 @@ public class ItemPetListAdapter extends RecyclerView.Adapter<ItemPetListAdapter.
         }
     }
 
-    public ItemPetListAdapter(Context context, List<Pet> listMountain, RecyclerView mRecyclerV) {
-        this.context = context;
+    public ItemPetListAdapter(Context context,ArrayList<Pet> listMountain) {
         this.listMountain = listMountain;
-        this.mRecyclerV = mRecyclerV;
+        this.mcontext = context;
     }
 
-    public List<Pet> getListMountain() {
+    public ArrayList<Pet> getListMountain() {
         return listMountain;
     }
 
-    public void setListMountain(List<Pet> listMountain) {
+    public void setListMountain(ArrayList<Pet> listMountain) {
         this.listMountain = listMountain;
     }
 
@@ -68,13 +71,13 @@ public class ItemPetListAdapter extends RecyclerView.Adapter<ItemPetListAdapter.
         holder.tvName.setText(getListMountain().get(position).getName());
         holder.tvElevation.setText(getListMountain().get(position).getElevation());
 
-        Glide.with(context).load(getListMountain().get(position).getPhoto()).into(holder.imgList);
+        Glide.with(mcontext).load(getListMountain().get(position).getPhoto()).into(holder.imgList);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent detailActivity = new Intent(context, Idea_pet_detail_Activity.class);
+                Intent detailActivity = new Intent(mcontext, Idea_pet_detail_Activity.class);
                 detailActivity.putExtra(Idea_pet_detail_Activity.EXTRA_MOUNTAIN, listMountain.get(position));
-                context.startActivity(detailActivity);
+                mcontext.startActivity(detailActivity);
             }
         });
 
@@ -87,4 +90,3 @@ public class ItemPetListAdapter extends RecyclerView.Adapter<ItemPetListAdapter.
     }
 
 }
-

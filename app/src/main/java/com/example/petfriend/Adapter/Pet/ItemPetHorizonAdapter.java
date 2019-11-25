@@ -23,20 +23,18 @@ import java.util.List;
 public class ItemPetHorizonAdapter extends RecyclerView.Adapter<ItemPetHorizonAdapter.HorViewHolder> {
 
     private Context context;
-    private List<Pet> listMountain;
-    private RecyclerView mRecyclerV;
+    private ArrayList<Pet> listMountain;
 
-    public ItemPetHorizonAdapter(Context context, List<Pet> listMountain, RecyclerView mRecyclerV) {
+    public ItemPetHorizonAdapter(Context context, ArrayList<Pet> listMountain) {
         this.context = context;
         this.listMountain = listMountain;
-        this.mRecyclerV = mRecyclerV;
     }
 
     public List<Pet> getListMountain() {
         return listMountain;
     }
 
-    public void setListMountain(List<Pet> listMountain) {
+    public void setListMountain(ArrayList<Pet> listMountain) {
         this.listMountain = listMountain;
     }
 

@@ -23,20 +23,19 @@ import java.util.List;
 public class ItemPetCardViewAdapter extends RecyclerView.Adapter<ItemPetCardViewAdapter.CardViewHolder> {
 
     private Context context;
-    private List<Pet> listMountain;
+    private ArrayList<Pet> listMountain;
     private RecyclerView mRecyclerV;
 
-    public ItemPetCardViewAdapter(Context context, List<Pet> listMountain, RecyclerView mRecyclerV) {
+    public ItemPetCardViewAdapter(Context context, ArrayList<Pet> listMountain) {
         this.context = context;
         this.listMountain = listMountain;
-        this.mRecyclerV = mRecyclerV;
     }
 
     public List<Pet> getListMountain() {
         return listMountain;
     }
 
-    public void setListMountain(List<Pet> listMountain) {
+    public void setListMountain(ArrayList<Pet> listMountain) {
         this.listMountain = listMountain;
     }
 

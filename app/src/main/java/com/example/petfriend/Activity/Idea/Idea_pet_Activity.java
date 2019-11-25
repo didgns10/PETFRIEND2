@@ -12,43 +12,35 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetCardViewAdapter;
+import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetGridAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetHorizonAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetListAdapter;
 import com.example.petfriend.Adapter.Pet.ItemPetListVisibleAdapter;
 import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetDBHelper;
+import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Idea_pet_Activity extends AppCompatActivity {
 
-    private RecyclerView recyclerView ,recyclerView_Hor;
-    private List<Pet> list;
-    private String filter = "";
-    private PetDBHelper dbHelper;
-    private ItemPetAdapter itemPetAdapter;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Pet> listPet;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
     private FloatingActionButton bt_plus;
-
-    // 화면 전환해도 데이터 유지 하게 해주는 세팅
-    final String STATE_TITLE = "state_title";
-    final String STATE_LIST = "state_list";
-    final String STATE_MODE = "state_mode";
-
-    int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_pet);
-
-        recyclerView = findViewById(R.id.recycler_view_pet);
-        recyclerView.setHasFixedSize(true);
 
         ImageButton bt_back = (ImageButton)findViewById(R.id.imageButton_back) ;
         bt_back.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +51,7 @@ public class Idea_pet_Activity extends AppCompatActivity {
                 finish();
             }
         });
+
         bt_plus = (FloatingActionButton)findViewById(R.id.bt_plus);
         bt_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +60,7 @@ public class Idea_pet_Activity extends AppCompatActivity {
             }
         });
 
-        list = new LinkedList<>();
+        recyclerView = findViewById(R.id.recycler_view_pet);
         showRecyclerViewPet();
 
         ImageButton bt_view = (ImageButton)findViewById(R.id.imageButton_view);
@@ -106,70 +99,169 @@ public class Idea_pet_Activity extends AppCompatActivity {
                 popup.show();//Popup Menu 보이기
             }
         });
-    }
-
-    private void showRecyclerViewPet() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        dbHelper = new PetDBHelper(this);
-        itemPetAdapter = new ItemPetAdapter(this,dbHelper.petList(filter),recyclerView);
-        recyclerView.setAdapter(itemPetAdapter);
-        bt_plus.show();
-    }
-
-    private void showRecyclerViewListVisible() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        dbHelper = new PetDBHelper(this);
-        ItemPetListVisibleAdapter listAdapter = new ItemPetListVisibleAdapter(this,dbHelper.petList(filter),recyclerView);
-        recyclerView.setAdapter(listAdapter);
-        bt_plus.hide();
-    }
-
-    private void showRecyclerViewListHor() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        dbHelper = new PetDBHelper(this);
-        ItemPetHorizonAdapter horizonAdapter = new ItemPetHorizonAdapter(this,dbHelper.petList(filter),recyclerView);
-        recyclerView.setAdapter(horizonAdapter);
-        bt_plus.hide();
 
     }
 
-    private void showRecyclerViewCardView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        dbHelper = new PetDBHelper(this);
-        ItemPetCardViewAdapter cardViewAdapter = new ItemPetCardViewAdapter(this,dbHelper.petList(filter),recyclerView);
-        recyclerView.setAdapter(cardViewAdapter);
-        bt_plus.hide();
+    private void showRecyclerViewPet(){
+        new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
+                new ItemPetAdapter().setConfig(recyclerView, Idea_pet_Activity.this,petlist,keys);
+                bt_plus.show();
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+    }
+    private void showRecyclerViewList(){
+        new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(Idea_pet_Activity.this));
+                ItemPetListAdapter listAdapter = new ItemPetListAdapter(Idea_pet_Activity.this,petlist);
+                recyclerView.setAdapter(listAdapter);
+                bt_plus.hide();
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+    }
+    private void showRecyclerViewCardView(){
+        new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(Idea_pet_Activity.this));
+                ItemPetCardViewAdapter cardViewAdapter = new ItemPetCardViewAdapter(Idea_pet_Activity.this,petlist);
+                recyclerView.setAdapter(cardViewAdapter);
+                bt_plus.hide();
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+    }
+    private void showRecyclerViewListVisible(){
+        new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(Idea_pet_Activity.this));
+                ItemPetListVisibleAdapter listAdapter = new ItemPetListVisibleAdapter(Idea_pet_Activity.this,petlist);
+                recyclerView.setAdapter(listAdapter);
+                bt_plus.hide();
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+    }
+    private void showRecyclerViewGrid(){
+        new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
+                recyclerView.setLayoutManager(new GridLayoutManager(Idea_pet_Activity.this,2));
+                ItemPetGridAdapter gridAdapter = new ItemPetGridAdapter(Idea_pet_Activity.this,petlist);
+                recyclerView.setAdapter(gridAdapter);
+                bt_plus.hide();
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+    }
+    private void showRecyclerViewListHor(){
+        new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(Idea_pet_Activity.this,2,GridLayoutManager.HORIZONTAL,false);
+                recyclerView.setLayoutManager(gridLayoutManager);
+                ItemPetHorizonAdapter horizonAdapter = new ItemPetHorizonAdapter(Idea_pet_Activity.this,petlist);
+                recyclerView.setAdapter(horizonAdapter);
+                bt_plus.hide();
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
     }
 
-    private void setActionBarTitle(String title) {
-        getSupportActionBar().setTitle(title);
-    }
 
-    private void showRecyclerViewGrid() {
-
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        dbHelper = new PetDBHelper(this);
-        ItemPetGridAdapter gridAdapter = new ItemPetGridAdapter(this,dbHelper.petList(filter),recyclerView);
-        recyclerView.setAdapter(gridAdapter);
-        bt_plus.hide();
-    }
-
-    private void showRecyclerViewList() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        dbHelper = new PetDBHelper(this);
-        ItemPetListAdapter listAdapter = new ItemPetListAdapter(this,dbHelper.petList(filter),recyclerView);
-        recyclerView.setAdapter(listAdapter);
-        bt_plus.hide();
-    }
     private void goToAddUserActivity(){
         Intent intent = new Intent(Idea_pet_Activity.this, Idea_PetAddActivity.class);
         startActivity(intent);
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        itemPetAdapter.notifyDataSetChanged();
     }
 
 }

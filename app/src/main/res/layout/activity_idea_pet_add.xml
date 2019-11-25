@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPupple"
         android:text="추가"
+        android:textColor="#FFFCFC"
         android:textSize="24sp" />
 
 </LinearLayout>

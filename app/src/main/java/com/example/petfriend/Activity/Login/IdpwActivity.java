@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,7 +39,7 @@ public class IdpwActivity extends AppCompatActivity {
             }
         });
 
-        Button bt_email = (Button)findViewById(R.id.button_idpw);
+        Button bt_email = (Button) findViewById(R.id.button_idpw);
 
         bt_email.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,29 +59,33 @@ public class IdpwActivity extends AppCompatActivity {
     }
 
     private void idpw() {
-        String email = ((EditText)findViewById(R.id.editText_idpw_email)).getText().toString();
+        String email = ((EditText) findViewById(R.id.editText_idpw_email)).getText().toString();
 
-        if(email.length() > 0){
+        if (email.length() > 0) {
+            final RelativeLayout loaderlayout = findViewById(R.id.loaderlayout);
+            loaderlayout.setVisibility(View.VISIBLE);
             mAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            loaderlayout.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
                                 startToast("이메일을 보냈습니다.");
                                 Intent intent = new Intent(IdpwActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
-                            }else{
+                            } else {
                                 startToast("이메일을 보내기 실패했습니다.");
                             }
                         }
                     });
-        }else{
+        } else {
             startToast("이메일을 입력해주세요.");
         }
 
     }
-    private void startToast(String msg){
+
+    private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

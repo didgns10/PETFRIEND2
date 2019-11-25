@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPupple"
         android:text="업데이트"
+        android:textColor="#FFFFFF"
         android:textSize="24sp" />
 
 </LinearLayout>

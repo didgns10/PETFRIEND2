@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.petfriend.Activity.MainActivity;
-import com.example.petfriend.Activity.Newspeed.newspeedActivity;
-import com.example.petfriend.Model.PetDBHelper;
 import com.example.petfriend.R;
 
 public class IdeaActivity extends AppCompatActivity {

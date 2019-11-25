@@ -59,11 +59,23 @@ public class Diary_Add_Activity extends AppCompatActivity {
         dp.init(dp.getYear(), dp.getMonth(), dp.getDayOfMonth()+1, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                di_time=String.format(dp.getYear()+"년 "+(dp.getMonth())+"월 "+dp.getDayOfMonth()+"일");
+                if(dp.getMonth()+1 < 10){
+                    if(dp.getDayOfMonth()<10) {
+                        di_time = String.format(dp.getYear() + "년 " + "0" + (dp.getMonth() + 1) + "월 " + "0" + dp.getDayOfMonth() + "일");
+                    }else{
+                        di_time = String.format(dp.getYear() + "년 " + "0" + (dp.getMonth() + 1) + "월 "+ dp.getDayOfMonth() + "일");
+                    }
+                }else {
+                    if(dp.getDayOfMonth()<10) {
+                        di_time = String.format(dp.getYear() + "년 " + (dp.getMonth() + 1) + "월 "+ "0" + dp.getDayOfMonth() + "일");
+                    }else{
+                        di_time = String.format(dp.getYear() + "년 " + (dp.getMonth() + 1) + "월 " + dp.getDayOfMonth() + "일");
+                    }
+                }
             }
         });
         if(di_time==null){
-            di_time=String.format(dp.getYear()+"년 "+(dp.getMonth())+"월 "+dp.getDayOfMonth()+"일");
+            di_time=String.format(dp.getYear()+"년 "+(dp.getMonth()+1)+"월 "+dp.getDayOfMonth()+"일");
         }
         bt_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +104,7 @@ public class Diary_Add_Activity extends AppCompatActivity {
                         startToast("권한을 허용해 주세요.");
                     }
                 } else {
-                    Intent intent = new Intent(Diary_Add_Activity.this, GalleryActivity.class);
-                    startActivityForResult(intent,0);
+                    myStartActivity(GalleryActivity.class,"image",0);
                 }
             }
         });
@@ -129,6 +140,12 @@ public class Diary_Add_Activity extends AppCompatActivity {
         else{
             Toast.makeText(this, "빈칸 없이 채워주세요.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void myStartActivity(Class c, String media, int requestCode){
+        Intent intent = new Intent(this,c);
+        intent.putExtra("media", media);
+        startActivityForResult(intent,requestCode);
     }
 
     private void goBackHome(){

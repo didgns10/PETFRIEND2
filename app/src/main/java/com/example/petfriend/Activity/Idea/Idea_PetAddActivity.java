@@ -9,10 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetDBHelper;
+import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.R;
+
+import java.util.ArrayList;
 
 public class Idea_PetAddActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class Idea_PetAddActivity extends AppCompatActivity {
     private EditText et_description;
     private Button bt_add;
 
-    private PetDBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,31 +43,40 @@ public class Idea_PetAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //call the save person method
-                saveMountain();
+                //saveMountain();
+                Pet pet = new Pet();
+                pet.setName(et_name.getText().toString().trim());
+                pet.setElevation(et_elevation.getText().toString().trim());
+                pet.setPhoto(et_photo.getText().toString().trim());
+                pet.setDescription(et_description.getText().toString().trim());
+                pet.setLocation(et_location.getText().toString().trim());
+                new PetFireDBHelper().addPet(pet, new PetFireDBHelper.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
+
+                    }
+
+                    @Override
+                    public void DataIsInserted() {
+                        Toast.makeText(Idea_PetAddActivity.this,"펫이 추가 되었습니다.",Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
+                finish();
             }
         });
     }
-    private void saveMountain(){
-        String name = et_name.getText().toString().trim();
-        String elevation = et_elevation.getText().toString().trim();
-        String photo = et_photo.getText().toString().trim();
-        String description = et_description.getText().toString().trim();
-        String location = et_location.getText().toString().trim();
-        dbHelper = new PetDBHelper(this);
 
-        if(name.isEmpty() && elevation.isEmpty() && photo.isEmpty() && description.isEmpty() && location.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "빈칸 없이 채워주세요.", Toast.LENGTH_SHORT).show();
-        }else{
-            //create new person
-            Pet pet = new Pet(name, elevation, photo, description,location);
-            dbHelper.saveNewMountain(pet);
-
-            //finally redirect back home
-            // NOTE you can implement an sqlite callback then redirect on success delete
-            goBackHome();
-        }
-    }
 
     private void goBackHome(){
         startActivity(new Intent(Idea_PetAddActivity.this, Idea_pet_Activity.class));

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -72,11 +73,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = ((EditText)findViewById(R.id.editText_login_pw)).getText().toString();
 
         if(email.length() > 0 && password.length() >0){
+            final RelativeLayout loaderlayout = findViewById(R.id.loaderlayout);
+            loaderlayout.setVisibility(View.VISIBLE);
 
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            loaderlayout.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");

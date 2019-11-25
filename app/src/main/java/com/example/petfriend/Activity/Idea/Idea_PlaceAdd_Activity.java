@@ -10,10 +10,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetDBHelper;
+import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.Model.Place;
 import com.example.petfriend.Model.PlaceDBHelper;
+import com.example.petfriend.Model.PlaceFireDBHelper;
 import com.example.petfriend.R;
+
+import java.util.ArrayList;
 
 public class Idea_PlaceAdd_Activity extends AppCompatActivity {
 
@@ -24,7 +27,6 @@ public class Idea_PlaceAdd_Activity extends AppCompatActivity {
     private EditText et_link;
     private Button bt_add;
 
-    private PlaceDBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,31 +45,41 @@ public class Idea_PlaceAdd_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //call the save person method
-                savePlace();
+                //saveMountain();
+                Place place = new Place();
+                place.setName(et_name.getText().toString().trim());
+                place.setCategory(et_category.getText().toString().trim());
+                place.setPhoto(et_photo.getText().toString().trim());
+                place.setUrl(et_link.getText().toString().trim());
+                place.setLocation(et_location.getText().toString().trim());
+                new PlaceFireDBHelper().addPlace(place, new PlaceFireDBHelper.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(ArrayList<Place> places, ArrayList<String> keys) {
+
+                    }
+
+                    @Override
+                    public void DataIsInserted() {
+                        Toast.makeText(Idea_PlaceAdd_Activity.this,"핫플레이스가 추가 되었습니다.",Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
+                finish();
+
             }
         });
     }
-    private void savePlace(){
-        String name = et_name.getText().toString().trim();
-        String category = et_category.getText().toString().trim();
-        String photo = et_photo.getText().toString().trim();
-        String link = et_link.getText().toString().trim();
-        String location = et_location.getText().toString().trim();
-        dbHelper = new PlaceDBHelper(this);
 
-        if(name.isEmpty() && category.isEmpty() && photo.isEmpty() && link.isEmpty() && location.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "빈칸 없이 채워주세요.", Toast.LENGTH_SHORT).show();
-        }else{
-            //create new person
-            Place place = new Place(name, category, photo, location,link);
-            dbHelper.saveNewPlace(place);
-
-            //finally redirect back home
-            // NOTE you can implement an sqlite callback then redirect on success delete
-            goBackHome();
-        }
-    }
 
     private void goBackHome(){
         startActivity(new Intent(Idea_PlaceAdd_Activity.this, Idea_place_set_Activity.class));

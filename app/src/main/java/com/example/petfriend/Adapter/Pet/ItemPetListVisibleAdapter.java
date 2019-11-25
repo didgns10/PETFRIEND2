@@ -21,8 +21,7 @@ import java.util.List;
 
 public class ItemPetListVisibleAdapter extends RecyclerView.Adapter<ItemPetListVisibleAdapter.ListVisibleViewHolder>{
     private Context context;
-    private List<Pet> listMountain;
-    private RecyclerView mRecyclerV;
+    private ArrayList<Pet> listMountain;
 
     private SparseBooleanArray selectedItems = new SparseBooleanArray();
     // 직전에 클릭됐던 Item의 position
@@ -72,17 +71,16 @@ public class ItemPetListVisibleAdapter extends RecyclerView.Adapter<ItemPetListV
         }
     }
 
-    public ItemPetListVisibleAdapter(Context context, List<Pet> listMountain, RecyclerView mRecyclerV) {
+    public ItemPetListVisibleAdapter(Context context, ArrayList<Pet> listMountain) {
         this.context = context;
         this.listMountain = listMountain;
-        this.mRecyclerV = mRecyclerV;
     }
 
-    public List<Pet> getListMountain() {
+    public ArrayList<Pet> getListMountain() {
         return listMountain;
     }
 
-    public void setListMountain(List<Pet> listMountain) {
+    public void setListMountain(ArrayList<Pet> listMountain) {
         this.listMountain = listMountain;
     }
 

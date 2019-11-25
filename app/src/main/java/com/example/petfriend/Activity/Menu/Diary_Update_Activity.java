@@ -59,7 +59,7 @@ public class Diary_Update_Activity extends AppCompatActivity {
             }
         });
         if(di_time==null){
-            di_time=String.format(dp.getYear()+"년 "+(dp.getMonth())+"월 "+dp.getDayOfMonth()+"일");
+            di_time=String.format(dp.getYear()+"년 "+(dp.getMonth()+1)+"월 "+dp.getDayOfMonth()+"일");
         }
         dbHelper = new DiaryDBHelper(this);
         try {

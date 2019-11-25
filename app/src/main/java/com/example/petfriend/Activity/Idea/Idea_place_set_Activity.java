@@ -9,22 +9,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
+import com.example.petfriend.Adapter.Pet.ItemPetCardViewAdapter;
 import com.example.petfriend.Adapter.Place.ItemPlaceSetAdapter;
 import com.example.petfriend.Model.Place;
 import com.example.petfriend.Model.PlaceDBHelper;
+import com.example.petfriend.Model.PlaceFireDBHelper;
 import com.example.petfriend.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Idea_place_set_Activity extends AppCompatActivity {
 
     private RecyclerView recyclerView ;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<Place> placeList;
+    private ArrayList<Place> placeList;
     private ItemPlaceSetAdapter placeAdapter;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
     private String filter = "";
-    private PlaceDBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,7 @@ public class Idea_place_set_Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
 
         //populate recyclerview
-        populaterecyclerView(filter);
+        populaterecyclerView();
 
         FloatingActionButton bt_plus = (FloatingActionButton)findViewById(R.id.bt_plus);
         bt_plus.setOnClickListener(new View.OnClickListener() {
@@ -60,14 +67,30 @@ public class Idea_place_set_Activity extends AppCompatActivity {
         });
 
     }
-    private void populaterecyclerView(String filter){
-        dbHelper = new PlaceDBHelper(this);
-        placeAdapter = new ItemPlaceSetAdapter(this, dbHelper.placeList(filter), recyclerView);
-        recyclerView.setAdapter(placeAdapter);
+    private void populaterecyclerView(){
+        new PlaceFireDBHelper().readPlace(new PlaceFireDBHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<Place> placelist, ArrayList<String> keys) {
+                new ItemPlaceSetAdapter().setConfig(recyclerView, Idea_place_set_Activity.this,placelist,keys);
+
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        placeAdapter.notifyDataSetChanged();
-    }
+
 }

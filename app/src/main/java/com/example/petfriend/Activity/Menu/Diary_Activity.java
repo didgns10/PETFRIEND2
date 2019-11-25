@@ -45,9 +45,14 @@ public class Diary_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.filterOptions, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         //initialize the variables
-        mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view_diary);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_diary);
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
@@ -58,7 +63,7 @@ public class Diary_Activity extends AppCompatActivity {
         populaterecyclerView(filter);
 
 
-        FloatingActionButton bt_plus = (FloatingActionButton)findViewById(R.id.bt_plus);
+        FloatingActionButton bt_plus = (FloatingActionButton) findViewById(R.id.bt_plus);
         bt_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +80,19 @@ public class Diary_Activity extends AppCompatActivity {
             }
         });
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String filter = parent.getSelectedItem().toString();
+                populaterecyclerView(filter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                populaterecyclerView(filter);
+            }
+        });
+        spinner.setAdapter(adapter);
     }
     private void populaterecyclerView(String filter){
         dbHelper = new DiaryDBHelper(this);

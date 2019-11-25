@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -52,12 +53,14 @@ public class Signup_MemberActivity extends AppCompatActivity {
     private ImageView profile_image;
     private String profilePath;
     private FirebaseUser user;
+    private RelativeLayout loaderlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_member);
 
+        loaderlayout = findViewById(R.id.loaderlayout);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -122,8 +125,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
                         startToast("권한을 허용해 주세요.");
                     }
                 } else {
-                    Intent intent = new Intent(Signup_MemberActivity.this, GalleryActivity.class);
-                    startActivityForResult(intent,0);
+                    myStartActivity(GalleryActivity.class,"image",0);
                 }
             }
         });
@@ -170,6 +172,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
 
 
         if(address.length() > 0 && nickname.length() >0 && phone_num.length() >9){
+            loaderlayout.setVisibility(View.VISIBLE);
             FirebaseStorage storage = FirebaseStorage.getInstance();
             // Create a storage reference from our app
             StorageReference storageRef = storage.getReference();
@@ -179,7 +182,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
 
             if(profilePath == null){
                 MemberInfo memberInfo = new MemberInfo(nickname, phone_num, address);
-                uploader(memberInfo);
+                Memberuploader(memberInfo);
             }else{
                 try{
                     InputStream stream = new FileInputStream(new File(profilePath));
@@ -202,7 +205,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
                                 Uri downloadUri = task.getResult();
 
                                 MemberInfo memberInfo = new MemberInfo(nickname, phone_num, address,downloadUri.toString());
-                                uploader(memberInfo);
+                                Memberuploader(memberInfo);
 
                             } else {
                                 startToast("회원정보를 보내는데 실패하였습니다.");
@@ -221,12 +224,13 @@ public class Signup_MemberActivity extends AppCompatActivity {
 
     }
 
-    private void uploader(MemberInfo memberInfo){
+    private void Memberuploader(MemberInfo memberInfo){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(user.getUid()).set(memberInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        loaderlayout.setVisibility(View.GONE);
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                         startToast("회원정보 등록을 완료하였습니다.");
                         Intent intent = new Intent(Signup_MemberActivity.this, MainActivity.class);
@@ -237,6 +241,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        loaderlayout.setVisibility(View.GONE);
                         Log.w(TAG, "Error writing document", e);
                         startToast("회원정보 등록을 실패하였습니다.");
                     }
@@ -255,7 +260,11 @@ public class Signup_MemberActivity extends AppCompatActivity {
             }
         }
     }
-
+    private void myStartActivity(Class c, String media, int requestCode){
+        Intent intent = new Intent(this,c);
+        intent.putExtra("media", media);
+        startActivityForResult(intent,requestCode);
+    }
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }

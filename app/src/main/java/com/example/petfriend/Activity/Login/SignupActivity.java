@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -72,10 +73,13 @@ public class SignupActivity extends AppCompatActivity {
 
         if(email.length() > 0 && password.length() > 0 && re_password.length()>0 ){
             if(password.equals(re_password)){
+                final RelativeLayout loaderlayout = findViewById(R.id.loaderlayout);
+                loaderlayout.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                loaderlayout.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     startToast("이메일 등록이 완료되었습니다.");
                                     //성공했을때 UI로직

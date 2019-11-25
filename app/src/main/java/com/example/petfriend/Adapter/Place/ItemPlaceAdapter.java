@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.petfriend.Model.Place;
 import com.example.petfriend.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -25,17 +27,17 @@ import java.util.List;
 
 public class ItemPlaceAdapter extends RecyclerView.Adapter<ItemPlaceAdapter.ListViewHolder> implements Filterable {
 
-    private List<Place> petlist;
-    private List<Place> petlistfull;
+    private ArrayList<Place> petlist;
+    private ArrayList<Place> petlistfull;
     private Context context;
     private RecyclerView mRecyclerV;
 
-    public ItemPlaceAdapter( Context context,List<Place> petlist,RecyclerView mRecyclerV) {
+    public ItemPlaceAdapter( Context context,ArrayList<Place> petlist) {
             this.petlist = petlist;
-            this.context = context;
-            this.mRecyclerV = mRecyclerV;
-            petlistfull = new LinkedList<>(petlist);
+            this.context = context;;
+             petlistfull = new ArrayList<>(petlist);
             }
+
     public void add(int position, Place place) {
         petlist.add(position, place);
         notifyItemInserted(position);
@@ -89,7 +91,7 @@ public class ItemPlaceAdapter extends RecyclerView.Adapter<ItemPlaceAdapter.List
     private Filter petlistFilter = new Filter() {
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
-                List<Place> filteredList = new LinkedList<>();
+                ArrayList<Place> filteredList = new ArrayList<>();
 
                 if(constraint == null || constraint.length() == 0){
                 filteredList.addAll(petlistfull);
