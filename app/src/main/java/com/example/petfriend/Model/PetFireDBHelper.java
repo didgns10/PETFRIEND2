@@ -17,6 +17,7 @@ public class PetFireDBHelper {
     private DatabaseReference mReferncePet;
     private ArrayList<Pet> petlist = new ArrayList<>();
 
+
     public  interface DataStatus{
         void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys);
         void DataIsInserted();

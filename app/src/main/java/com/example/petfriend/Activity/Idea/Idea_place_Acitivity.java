@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -26,6 +27,7 @@ public class Idea_place_Acitivity extends AppCompatActivity {
     private String filter = "";
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
+    private RelativeLayout loaderlayout;
 
 
 
@@ -34,15 +36,17 @@ public class Idea_place_Acitivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_place);
 
+        loaderlayout = findViewById(R.id.loaderlayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_place);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
+        loaderlayout.setVisibility(View.VISIBLE);
         new PlaceFireDBHelper().readPlace(new PlaceFireDBHelper.DataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<Place> places, ArrayList<String> keys) {
                 final ItemPlaceAdapter itemPlaceAdapter = new ItemPlaceAdapter(Idea_place_Acitivity.this,places);
                 mRecyclerView.setAdapter(itemPlaceAdapter);
+                loaderlayout.setVisibility(View.GONE);
 
              //   placeList = new ArrayList<>();
 

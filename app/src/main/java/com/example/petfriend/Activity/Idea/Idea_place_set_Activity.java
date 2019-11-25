@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.example.petfriend.Adapter.Place.ItemPlaceSetAdapter;
 import com.example.petfriend.Model.Place;
@@ -28,19 +29,21 @@ public class Idea_place_set_Activity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private String filter = "";
+    private RelativeLayout loaderlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_place_set);
 
+        loaderlayout = findViewById(R.id.loaderlayout);
         //initialize the variables
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view_place);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-
+        loaderlayout.setVisibility(View.VISIBLE);
         //populate recyclerview
         populaterecyclerView();
 
@@ -68,7 +71,7 @@ public class Idea_place_set_Activity extends AppCompatActivity {
             @Override
             public void DataIsLoaded(ArrayList<Place> placelist, ArrayList<String> keys) {
                 new ItemPlaceSetAdapter().setConfig(recyclerView, Idea_place_set_Activity.this,placelist,keys);
-
+                loaderlayout.setVisibility(View.GONE);
             }
 
             @Override

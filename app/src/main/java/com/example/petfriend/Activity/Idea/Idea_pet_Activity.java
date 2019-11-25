@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,11 +37,14 @@ public class Idea_pet_Activity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private FloatingActionButton bt_plus;
+    private RelativeLayout loaderlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_pet);
+
+        loaderlayout = findViewById(R.id.loaderlayout);
 
         ImageButton bt_back = (ImageButton)findViewById(R.id.imageButton_back) ;
         bt_back.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +65,7 @@ public class Idea_pet_Activity extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.recycler_view_pet);
+        loaderlayout.setVisibility(View.VISIBLE);
         showRecyclerViewPet();
 
         ImageButton bt_view = (ImageButton)findViewById(R.id.imageButton_view);
@@ -108,6 +113,7 @@ public class Idea_pet_Activity extends AppCompatActivity {
             public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
                 new ItemPetAdapter().setConfig(recyclerView, Idea_pet_Activity.this,petlist,keys);
                 bt_plus.show();
+                loaderlayout.setVisibility(View.GONE);
             }
 
             @Override
