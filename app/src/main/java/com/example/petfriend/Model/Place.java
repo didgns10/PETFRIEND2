@@ -2,24 +2,24 @@ package com.example.petfriend.Model;
 
 public class Place {
 
-    private String name,category, photo, location, url;
-    private long id;
+    private String name,category, photo, location, url, user;
 
     public Place(){ }
-    public Place(String name, String category, String photo, String location, String url) {
+    public Place(String name, String category, String photo, String location, String url, String user) {
         this.name = name;
         this.category = category;
         this.photo = photo;
         this.location = location;
         this.url = url;
+        this.user = user;
     }
 
-    public long getId() {
-        return id;
+    public String getUser() {
+        return user;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getName() {

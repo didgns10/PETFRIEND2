@@ -7,21 +7,31 @@ import com.example.petfriend.R;
 public class MemberInfo {
 
 
-    private  String phone_num,nickname,address,photoUrl;
+    private  String phone_num,nickname,address,photoUrl, id;
 
 
+    public MemberInfo(){}
 
-    public MemberInfo(String nickname, String phone_num, String address , String photoUrl) {
+    public MemberInfo(String nickname, String phone_num, String address , String photoUrl,String id) {
         this.phone_num = phone_num;
         this.nickname = nickname;
         this.address = address;
         this.photoUrl = photoUrl;
+        this.id = id;
     }
 
     public MemberInfo(String nickname, String phone_num, String address) {
         this.phone_num = phone_num;
         this.nickname = nickname;
         this.address = address;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPhotoUrl() {

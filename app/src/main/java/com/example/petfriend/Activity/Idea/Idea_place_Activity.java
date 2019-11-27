@@ -19,7 +19,7 @@ import com.example.petfriend.R;
 
 import java.util.ArrayList;
 
-public class Idea_place_Acitivity extends AppCompatActivity {
+public class Idea_place_Activity extends AppCompatActivity {
 
     private RecyclerView recyclerView ;
     private ArrayList<Place> placeList;
@@ -44,7 +44,7 @@ public class Idea_place_Acitivity extends AppCompatActivity {
         new PlaceFireDBHelper().readPlace(new PlaceFireDBHelper.DataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<Place> places, ArrayList<String> keys) {
-                final ItemPlaceAdapter itemPlaceAdapter = new ItemPlaceAdapter(Idea_place_Acitivity.this,places);
+                final ItemPlaceAdapter itemPlaceAdapter = new ItemPlaceAdapter(Idea_place_Activity.this,places);
                 mRecyclerView.setAdapter(itemPlaceAdapter);
                 loaderlayout.setVisibility(View.GONE);
 
@@ -57,7 +57,7 @@ public class Idea_place_Acitivity extends AppCompatActivity {
                 bt_back.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Idea_place_Acitivity.this, IdeaActivity.class);
+                        Intent intent = new Intent(Idea_place_Activity.this, IdeaActivity.class);
                         startActivity(intent);
                         finish();
                     }

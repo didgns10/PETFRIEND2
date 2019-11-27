@@ -1,11 +1,16 @@
 package com.example.petfriend.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,14 +35,27 @@ import com.example.petfriend.Activity.Menu.myprofileActivity;
 import com.example.petfriend.Activity.Menu.optionActivity;
 import com.example.petfriend.Activity.Newspeed.newspeedActivity;
 import com.example.petfriend.Activity.Newspeed.newspeed_photo_selectActivity;
+import com.example.petfriend.Activity.Post.PostActivity;
 import com.example.petfriend.Adapter.NewsAdpter;
+import com.example.petfriend.Fragment.HomeFragment;
+import com.example.petfriend.Fragment.NotificationFragment;
+import com.example.petfriend.Fragment.ProfileFragment;
+import com.example.petfriend.Fragment.SearchFragment;
 import com.example.petfriend.Model.Newsdata;
+import com.example.petfriend.Model.Place;
 import com.example.petfriend.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -53,88 +71,76 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private FirebaseAuth mAuth;
-    RequestQueue queue ;
-    private RecyclerView mRrecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private List<Newsdata> myDataset ;
+    BottomNavigationView bottomNavigationView;
+    Fragment selectedFragment = null;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReferncePlace;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        bottomNavigationView = findViewById(R.id.bottom_navigaion);
 
-       if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-        }else {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference docRef = db.collection("users").document(user.getUid());
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        } else {
+            mDatabase = FirebaseDatabase.getInstance();
+            mReferncePlace = mDatabase.getReference("users");
+            mDatabase.getReference().child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if(document != null) {
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            } else {
-                                Log.d(TAG, "No such document");
-                                Intent intent = new Intent(MainActivity.this, Signup_MemberActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot != null) {
+                        if (dataSnapshot.exists()) {
+                            Log.d(TAG, "such document");
+                        } else {
+                            Log.d(TAG, "No such document");
+                            Intent intent = new Intent(MainActivity.this, Signup_MemberActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
                     }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
         }
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new HomeFragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
         ImageButton button_menu = (ImageButton) findViewById(R.id.imageButton_menu);
-        ImageButton button_newspeed = (ImageButton) findViewById(R.id.imageButton_newspeed);
-        ImageButton button_idea = (ImageButton) findViewById(R.id.imageButton_idea);
-        ImageButton button_notice = (ImageButton) findViewById(R.id.imageButton_notice);
-        FloatingActionButton button_chat = (FloatingActionButton) findViewById(R.id.float_chat);
-        ImageButton button_serach = (ImageButton) findViewById(R.id.imageButton_search);
-
-        button_newspeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent4 = new Intent(MainActivity.this, newspeedActivity.class);
-                intent4.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent4);
-
-            }
-        });
-        // 정보주는 이미지 클릭했을때
-        button_idea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent4 = new Intent(MainActivity.this, IdeaActivity.class);
-                intent4.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent4);
-
-            }
-        });
-
-
 
         button_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popup= new PopupMenu(getApplicationContext(), view);//v는 클릭된 뷰를 의미
+                PopupMenu popup = new PopupMenu(getApplicationContext(), view);//v는 클릭된 뷰를 의미
 
                 getMenuInflater().inflate(R.menu.menu, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
+                            case R.id.pet_idea:
+                                Intent intent4 = new Intent(MainActivity.this, IdeaActivity.class);
+                                startActivity(intent4);
+                                break;
                             case R.id.diary:
                                 Intent intent = new Intent(MainActivity.this, Diary_Activity.class);
                                 startActivity(intent);
@@ -153,94 +159,52 @@ public class MainActivity extends AppCompatActivity {
                             default:
                                 break;
                         }
-                        return false;
+                        return true;
                     }
                 });
                 popup.show();//Popup Menu 보이기
             }
 
         });
-        mRrecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        mRrecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mRrecyclerView.setLayoutManager(mLayoutManager);
 
-        queue = Volley.newRequestQueue(this);
-        getNews();
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-    public void image_like4(View view) {
-
-                Intent intent = new Intent(MainActivity.this, newspeed_photo_selectActivity.class);
-                startActivity(intent);
-    }
-
-    public void getNews() {
-
-        String url ="\n" +
-                "https://newsapi.org/v2/everything?q=apple&from=2019-11-12&to=2019-11-12&sortBy=popularity&apiKey=ae092d0c38db47cfb48eedffd9386524";
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Log.d("NEWS",response);
-
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-
-                            JSONArray arrayarticles = jsonObj.getJSONArray("articles");
-
-                            //response -> NewsData 클래스 에다가 분류
-                            List<Newsdata> news = new ArrayList<>();
-
-                            for(int i = 0, j = arrayarticles.length(); i < j ; i++ ){
-
-                                JSONObject obj = arrayarticles.getJSONObject(i);
-
-                                Log.d("NEWS",obj.toString());
-
-                                Newsdata newsdata = new Newsdata();
-                                newsdata.setTitle(obj.getString("title"));
-                                newsdata.setUrlToImage(obj.getString("urlToImage"));
-                                newsdata.setContent(obj.getString("description"));
-                                newsdata.setUrl(obj.getString("url"));
-                                news.add(newsdata);
-                            }
-
-                            // specify an adapter (see also next example)
-                            mAdapter = new NewsAdpter(news, MainActivity.this, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if(v.getTag() != null){
-                                        int positon =  (int) v.getTag();
-                                        String urll = ((NewsAdpter) mAdapter).getNews(positon).getUrl();
-                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urll));
-                                        startActivity(intent);
-                                    }
-                                }
-                            });
-                            mRrecyclerView.setAdapter(mAdapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_home:
+                            selectedFragment = new HomeFragment();
+                            break;
+                        case R.id.nav_search:
+                            selectedFragment = new SearchFragment();
+                            break;
+                        case R.id.nav_add:
+                            selectedFragment = null;
+                            Intent intent1 = new Intent(MainActivity.this, PostActivity.class);
+                            startActivity(intent1);
+                            break;
+                        case R.id.nav_heart:
+                            selectedFragment = new NotificationFragment();
+                            break;
+                        case R.id.nav_profile:
+                            SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                            editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            editor.apply();
+                            selectedFragment = new ProfileFragment();
+                            break;
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                    if (selectedFragment != null) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
+                    }
 
-            }
-        });
+                    return true;
+                }
+            };
 
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-    }
 }
 

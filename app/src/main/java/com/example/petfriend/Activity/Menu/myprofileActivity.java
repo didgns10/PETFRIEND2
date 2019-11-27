@@ -18,11 +18,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.Login.Signup_MemberActivity;
 import com.example.petfriend.Activity.MainActivity;
+import com.example.petfriend.Model.MemberInfo;
 import com.example.petfriend.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,21 +37,27 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class myprofileActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReferncePlace;
+    private FirebaseUser user;
+    private TextView textView_nick;
+    private ImageView imageView_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myprofile);
-        final TextView textView_nick = (TextView)findViewById(R.id.textView_nick);
-        final ImageView imageView_profile = (ImageView)findViewById(R.id.imageView_profile);
+         textView_nick = (TextView)findViewById(R.id.textView_nick);
+         imageView_profile = (ImageView)findViewById(R.id.imageView_profile);
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
+/*
         final DocumentReference docRef = FirebaseFirestore.getInstance().collection("users").document(user.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -69,7 +81,32 @@ public class myprofileActivity extends AppCompatActivity {
                 }
 
             }
+        });*/
+
+        mDatabase = FirebaseDatabase.getInstance();
+        mReferncePlace = mDatabase.getReference("users");
+        mDatabase.getReference().child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot != null){
+                    if(dataSnapshot.exists()){
+                        Log.d(TAG, "such document");
+                        MemberInfo memberInfo = dataSnapshot.getValue(MemberInfo.class);
+                        textView_nick.setText(memberInfo.getNickname());
+                        Glide.with(myprofileActivity.this).load(memberInfo.getPhotoUrl()).centerCrop().override(500).into(imageView_profile);
+
+                    }else{
+                        Log.d(TAG, "No such document");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
         });
+
 
         //자기소개 글 저장 하기
         TextView textView=(TextView)findViewById(R.id.textView_self);

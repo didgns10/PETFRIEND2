@@ -141,6 +141,7 @@ public class Diary_Add_Activity extends AppCompatActivity {
 
     private void goBackHome(){
         startActivity(new Intent(Diary_Add_Activity.this, Diary_Activity.class));
+        finish();
     }
 
     private void startToast(String msg){

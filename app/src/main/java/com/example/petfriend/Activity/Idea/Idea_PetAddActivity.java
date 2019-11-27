@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.petfriend.Model.Pet;
 import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -23,13 +25,15 @@ public class Idea_PetAddActivity extends AppCompatActivity {
     private EditText et_photo;
     private EditText et_description;
     private Button bt_add;
-
+    private FirebaseUser user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_pet_add);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         et_name = (EditText)findViewById(R.id.et_add_name);
         et_elevation = (EditText)findViewById(R.id.et_add_elevation);
@@ -50,6 +54,7 @@ public class Idea_PetAddActivity extends AppCompatActivity {
                 pet.setPhoto(et_photo.getText().toString().trim());
                 pet.setDescription(et_description.getText().toString().trim());
                 pet.setLocation(et_location.getText().toString().trim());
+                pet.setUser(user.getUid());
                 new PetFireDBHelper().addPet(pet, new PetFireDBHelper.DataStatus() {
                     @Override
                     public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
@@ -80,5 +85,6 @@ public class Idea_PetAddActivity extends AppCompatActivity {
 
     private void goBackHome(){
         startActivity(new Intent(Idea_PetAddActivity.this, Idea_pet_Activity.class));
+        finish();
     }
 }

@@ -64,7 +64,7 @@
         app:backgroundTint="@color/colorPupple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_plus" />
 
     <TextView
         android:id="@+id/textView3"

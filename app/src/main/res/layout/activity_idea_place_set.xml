@@ -71,7 +71,7 @@
         app:backgroundTint="@color/colorPupple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_plus" />
     <include
         layout="@layout/view_loder"
         android:layout_width="0dp"

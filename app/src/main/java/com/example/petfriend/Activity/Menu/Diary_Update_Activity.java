@@ -139,6 +139,7 @@ public class Diary_Update_Activity extends AppCompatActivity {
 
     private void goBackHome(){
         startActivity(new Intent(Diary_Update_Activity.this, Diary_Activity.class));
+        finish();
     }
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

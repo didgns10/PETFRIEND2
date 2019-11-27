@@ -39,65 +39,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView_title"
         app:layout_constraintTop_toTopOf="@+id/imageView_background" />
 
-    <ImageButton
-        android:id="@+id/imageButton_home"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
-        android:background="#006FFF3B"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/home1" />
 
-    <ImageButton
-        android:id="@+id/imageButton_newspeed"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
-        android:background="#006FFF3B"
-        app:layout_constraintStart_toEndOf="@id/imageButton_home"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/news" />
-
-    <ImageButton
-        android:id="@+id/imageButton_idea"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
-        android:background="#006FFF3B"
-        app:layout_constraintStart_toEndOf="@id/imageButton_newspeed"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/idea" />
-
-    <ImageButton
-        android:id="@+id/imageButton_notice"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
-        android:background="#006FFF3B"
-        app:layout_constraintStart_toEndOf="@id/imageButton_idea"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bell" />
-
-    <TextView
-        android:id="@+id/textView_repw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="최신 뉴스"
-        android:textColor="#090000"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_home" />
 
     <ImageButton
         android:id="@+id/imageButton_menu"
@@ -108,39 +50,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu" />
 
-    <ImageButton
-        android:id="@+id/imageButton_search"
-        android:layout_width="40dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/float_chat"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_repw">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/textView_title" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/float_chat"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        android:backgroundTint="@color/colorPupple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_message" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigaion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:itemIconTint="@color/selector"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_navigation" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

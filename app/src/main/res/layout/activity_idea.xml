@@ -21,12 +21,12 @@
         android:id="@+id/textView_repw2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:text="핫 플레이스"
-        android:textColor="@color/colorPupple"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView_pet" />
 
@@ -34,9 +34,8 @@
         android:id="@+id/imageView_title"
         android:layout_width="52dp"
         android:layout_height="45dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        android:layout_marginStart="130dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/pet" />
 
@@ -50,91 +49,35 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/imageView_title"
         app:layout_constraintTop_toTopOf="@+id/imageView_background" />
-
-    <ImageView
-        android:id="@+id/imageView3"
+    <ImageButton
+        android:id="@+id/imageButton_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="40dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search" />
-
-    <ImageButton
-        android:id="@+id/imageButton_home"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:background="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/home" />
-
-    <ImageButton
-        android:id="@+id/imageButton_newspeed"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
-        android:background="#006FFF3B"
-        app:layout_constraintStart_toEndOf="@id/imageButton_home"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/news" />
-
-    <ImageButton
-        android:id="@+id/imageButton_idea"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
-        android:background="#006FFF3B"
-        app:layout_constraintStart_toEndOf="@id/imageButton_newspeed"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/idea1" />
-
-    <ImageButton
-        android:id="@+id/imageButton_notice"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="70dp"
-        android:background="#006FFF3B"
-        app:layout_constraintStart_toEndOf="@id/imageButton_idea"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bell" />
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <TextView
         android:id="@+id/textView_repw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="PET 정보"
-        android:textColor="@color/colorPupple"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_home" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_title" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_pet"
         android:layout_width="0dp"
-        android:layout_height="230dp"
+        android:layout_height="270dp"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +123,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_place"
         android:layout_width="0dp"
-        android:layout_height="230dp"
+        android:layout_height="270dp"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

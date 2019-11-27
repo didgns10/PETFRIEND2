@@ -104,6 +104,7 @@ public class Diary_Activity extends AppCompatActivity {
     private void goToAddUserActivity(){
         Intent intent = new Intent(Diary_Activity.this, Diary_Add_Activity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

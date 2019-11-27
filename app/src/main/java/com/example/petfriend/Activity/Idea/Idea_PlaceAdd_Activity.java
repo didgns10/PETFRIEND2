@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.petfriend.Model.Place;
 import com.example.petfriend.Model.PlaceFireDBHelper;
 import com.example.petfriend.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -23,12 +25,15 @@ public class Idea_PlaceAdd_Activity extends AppCompatActivity {
     private EditText et_photo;
     private EditText et_link;
     private Button bt_add;
+    private FirebaseUser user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_place_add);
+
+         user = FirebaseAuth.getInstance().getCurrentUser();
 
         et_name = (EditText)findViewById(R.id.et_add_name);
         et_category = (EditText)findViewById(R.id.et_add_category);
@@ -49,6 +54,7 @@ public class Idea_PlaceAdd_Activity extends AppCompatActivity {
                 place.setPhoto(et_photo.getText().toString().trim());
                 place.setUrl(et_link.getText().toString().trim());
                 place.setLocation(et_location.getText().toString().trim());
+                place.setUser(user.getUid());
                 new PlaceFireDBHelper().addPlace(place, new PlaceFireDBHelper.DataStatus() {
                     @Override
                     public void DataIsLoaded(ArrayList<Place> places, ArrayList<String> keys) {

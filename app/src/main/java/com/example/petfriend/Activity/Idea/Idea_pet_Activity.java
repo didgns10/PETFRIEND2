@@ -56,17 +56,9 @@ public class Idea_pet_Activity extends AppCompatActivity {
             }
         });
 
-        bt_plus = (FloatingActionButton)findViewById(R.id.bt_plus);
-        bt_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToAddUserActivity();
-            }
-        });
-
         recyclerView = findViewById(R.id.recycler_view_pet);
         loaderlayout.setVisibility(View.VISIBLE);
-        showRecyclerViewPet();
+        showRecyclerViewList();
 
         ImageButton bt_view = (ImageButton)findViewById(R.id.imageButton_view);
         bt_view.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +71,6 @@ public class Idea_pet_Activity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
-                            case R.id.action_pet:
-                                showRecyclerViewPet();
-                                break;
                             case R.id.action_list:
                                 showRecyclerViewList();
                                 break;
@@ -107,31 +96,6 @@ public class Idea_pet_Activity extends AppCompatActivity {
 
     }
 
-    private void showRecyclerViewPet(){
-        new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
-            @Override
-            public void DataIsLoaded(ArrayList<Pet> petlist, ArrayList<String> keys) {
-                new ItemPetAdapter().setConfig(recyclerView, Idea_pet_Activity.this,petlist,keys);
-                bt_plus.show();
-                loaderlayout.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void DataIsInserted() {
-
-            }
-
-            @Override
-            public void DataIsUpdated() {
-
-            }
-
-            @Override
-            public void DataIsDeleted() {
-
-            }
-        });
-    }
     private void showRecyclerViewList(){
         new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
             @Override
@@ -139,7 +103,7 @@ public class Idea_pet_Activity extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(Idea_pet_Activity.this));
                 ItemPetListAdapter listAdapter = new ItemPetListAdapter(Idea_pet_Activity.this,petlist);
                 recyclerView.setAdapter(listAdapter);
-                bt_plus.hide();
+                loaderlayout.setVisibility(View.GONE);
             }
 
             @Override
@@ -165,7 +129,6 @@ public class Idea_pet_Activity extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(Idea_pet_Activity.this));
                 ItemPetCardViewAdapter cardViewAdapter = new ItemPetCardViewAdapter(Idea_pet_Activity.this,petlist);
                 recyclerView.setAdapter(cardViewAdapter);
-                bt_plus.hide();
             }
 
             @Override
@@ -191,7 +154,6 @@ public class Idea_pet_Activity extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(Idea_pet_Activity.this));
                 ItemPetListVisibleAdapter listAdapter = new ItemPetListVisibleAdapter(Idea_pet_Activity.this,petlist);
                 recyclerView.setAdapter(listAdapter);
-                bt_plus.hide();
             }
 
             @Override
@@ -217,7 +179,6 @@ public class Idea_pet_Activity extends AppCompatActivity {
                 recyclerView.setLayoutManager(new GridLayoutManager(Idea_pet_Activity.this,2));
                 ItemPetGridAdapter gridAdapter = new ItemPetGridAdapter(Idea_pet_Activity.this,petlist);
                 recyclerView.setAdapter(gridAdapter);
-                bt_plus.hide();
             }
 
             @Override
@@ -244,7 +205,6 @@ public class Idea_pet_Activity extends AppCompatActivity {
                 recyclerView.setLayoutManager(gridLayoutManager);
                 ItemPetHorizonAdapter horizonAdapter = new ItemPetHorizonAdapter(Idea_pet_Activity.this,petlist);
                 recyclerView.setAdapter(horizonAdapter);
-                bt_plus.hide();
             }
 
             @Override

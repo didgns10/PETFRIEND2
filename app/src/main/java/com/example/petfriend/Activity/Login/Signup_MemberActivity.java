@@ -37,6 +37,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -54,6 +56,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
     private String profilePath;
     private FirebaseUser user;
     private RelativeLayout loaderlayout;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,14 +185,12 @@ public class Signup_MemberActivity extends AppCompatActivity {
 
             if(profilePath == null){
                 MemberInfo memberInfo = new MemberInfo(nickname, phone_num, address);
-                Memberuploader(memberInfo);
+                MerberUploader(memberInfo);
             }else{
                 try{
                     InputStream stream = new FileInputStream(new File(profilePath));
 
                     UploadTask uploadTask = mountainImagesRef.putStream(stream);
-
-
                     uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -204,8 +205,8 @@ public class Signup_MemberActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
 
-                                MemberInfo memberInfo = new MemberInfo(nickname, phone_num, address,downloadUri.toString());
-                                Memberuploader(memberInfo);
+                                MemberInfo memberInfo = new MemberInfo(nickname, phone_num, address,downloadUri.toString(),user.getUid());
+                                MerberUploader(memberInfo);
 
                             } else {
                                 startToast("회원정보를 보내는데 실패하였습니다.");
@@ -224,14 +225,13 @@ public class Signup_MemberActivity extends AppCompatActivity {
 
     }
 
-    private void Memberuploader(MemberInfo memberInfo){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(user.getUid()).set(memberInfo)
+    private void MerberUploader(MemberInfo memberInfo){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("users").child(user.getUid()).setValue(memberInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         loaderlayout.setVisibility(View.GONE);
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
                         startToast("회원정보 등록을 완료하였습니다.");
                         Intent intent = new Intent(Signup_MemberActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -247,6 +247,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
                     }
                 });
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
