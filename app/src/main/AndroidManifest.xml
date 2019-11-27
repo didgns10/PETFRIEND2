@@ -22,6 +22,8 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity android:name=".Activity.Post.PostActivity"></activity>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.AppCompat"/>
 
         <!-- //다이어리 -->
         <activity android:name=".Activity.Menu.Diary_detail_Activity"

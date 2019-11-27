@@ -38,6 +38,7 @@ import com.example.petfriend.Activity.Newspeed.newspeed_photo_selectActivity;
 import com.example.petfriend.Activity.Post.PostActivity;
 import com.example.petfriend.Adapter.NewsAdpter;
 import com.example.petfriend.Fragment.HomeFragment;
+import com.example.petfriend.Fragment.NewspeedFragment;
 import com.example.petfriend.Fragment.NotificationFragment;
 import com.example.petfriend.Fragment.ProfileFragment;
 import com.example.petfriend.Fragment.SearchFragment;
@@ -182,10 +183,8 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.nav_search:
                             selectedFragment = new SearchFragment();
                             break;
-                        case R.id.nav_add:
-                            selectedFragment = null;
-                            Intent intent1 = new Intent(MainActivity.this, PostActivity.class);
-                            startActivity(intent1);
+                        case R.id.nav_newspeed:
+                            selectedFragment = new NewspeedFragment();
                             break;
                         case R.id.nav_heart:
                             selectedFragment = new NotificationFragment();

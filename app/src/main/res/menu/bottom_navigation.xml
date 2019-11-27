@@ -10,8 +10,8 @@
         android:icon="@drawable/ic_search"
         android:title=""/>
     <item
-        android:id="@+id/nav_add"
-        android:icon="@drawable/ic_add"
+        android:id="@+id/nav_newspeed"
+        android:icon="@drawable/ic_newspeed_in"
         android:title=""/>
     <item
         android:id="@+id/nav_heart"
