@@ -39,6 +39,8 @@ public class Idea_place_Activity extends AppCompatActivity {
         loaderlayout = findViewById(R.id.loaderlayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_place);
         mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager.setReverseLayout(true);
+        mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         loaderlayout.setVisibility(View.VISIBLE);
         new PlaceFireDBHelper().readPlace(new PlaceFireDBHelper.DataStatus() {

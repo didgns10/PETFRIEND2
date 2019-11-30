@@ -56,6 +56,8 @@ public class Diary_Activity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager) mLayoutManager).setReverseLayout(true);
+        ((LinearLayoutManager) mLayoutManager).setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //populate recyclerview

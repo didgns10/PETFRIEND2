@@ -2,8 +2,12 @@ package com.example.petfriend.Activity.Login;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.RenderNode;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +18,8 @@ import com.example.petfriend.R;
 
 public class LodingActivity extends AppCompatActivity {
     Handler handler = new Handler();
+
+
     Runnable r = new Runnable() {
         @Override
                 public void run(){
@@ -22,6 +28,7 @@ public class LodingActivity extends AppCompatActivity {
                         finish();
                 }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

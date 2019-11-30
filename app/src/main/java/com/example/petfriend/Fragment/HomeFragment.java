@@ -2,6 +2,7 @@ package com.example.petfriend.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,11 +10,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Adapter.NewsAdpter;
 import com.example.petfriend.Model.Newsdata;
@@ -39,7 +45,14 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     RequestQueue queue ;
-
+    List<Newsdata> news;
+    Newsdata newsdata;
+    Handler handler = new Handler();
+    private TextView textView;
+    private int index;
+    private int newdata =0;
+    Thread t;
+    private  Animation animTransUp;
 
     public HomeFragment(){
 
@@ -56,10 +69,12 @@ public class HomeFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRrecyclerView.setLayoutManager(mLayoutManager);
 
-
-
+        textView = (TextView)rootView.findViewById(R.id.tv_news_title);
         queue = Volley.newRequestQueue(getActivity());
         getNews();
+
+        animTransUp = AnimationUtils.loadAnimation(getActivity(),R.anim.anim_traslate_up);
+
         return rootView;
 
     }
@@ -84,7 +99,7 @@ public class HomeFragment extends Fragment {
                             JSONArray arrayarticles = jsonObj.getJSONArray("articles");
 
                             //response -> NewsData 클래스 에다가 분류
-                            List<Newsdata> news = new ArrayList<>();
+                             news = new ArrayList<>();
 
                             for(int i = 0, j = arrayarticles.length(); i < j ; i++ ){
 
@@ -92,7 +107,7 @@ public class HomeFragment extends Fragment {
 
                                 Log.d("NEWS",obj.toString());
 
-                                Newsdata newsdata = new Newsdata();
+                                newsdata = new Newsdata();
                                 newsdata.setTitle(obj.getString("title"));
                                 newsdata.setUrlToImage(obj.getString("urlToImage"));
                                 newsdata.setContent(obj.getString("description"));
@@ -114,6 +129,45 @@ public class HomeFragment extends Fragment {
                             });
                             mRrecyclerView.setAdapter(mAdapter);
 
+                            if(news != null) {
+                                final int[] i = {0};
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        while (true) {
+                                            try {
+                                                if(getActivity() != null) {
+                                                    getActivity().runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setVisibility(View.VISIBLE);
+                                                            textView.setText(news.get(i[0]).getTitle());
+                                                            textView.startAnimation(animTransUp);
+                                                            textView.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View v) {
+                                                                    String urll = (news.get(i[0] - 1).getUrl());
+                                                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urll));
+                                                                    startActivity(intent);
+                                                                }
+                                                            });
+                                                            Log.e("로그", "로그1");
+                                                            i[0]++;
+                                                            if (news.size() == i[0]) {
+                                                                i[0] = 0;
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                                Thread.sleep(3000);
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }).start();
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -130,4 +184,28 @@ public class HomeFragment extends Fragment {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+    public class AnimThread extends Thread {
+        @Override
+        public void run() {
+            index = 0;
+            while (true) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        textView.setText(news.get(index).getTitle());
+                    }
+                });
+                index++;
+              /*  if(index == news.size()){
+                    index = 0;
+                }*/
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }

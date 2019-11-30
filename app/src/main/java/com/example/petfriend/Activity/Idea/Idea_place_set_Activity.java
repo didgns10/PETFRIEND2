@@ -42,6 +42,8 @@ public class Idea_place_set_Activity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager) mLayoutManager).setReverseLayout(true);
+        ((LinearLayoutManager) mLayoutManager).setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
         loaderlayout.setVisibility(View.VISIBLE);
         //populate recyclerview

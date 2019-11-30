@@ -17,8 +17,6 @@ public class Newsdata implements Serializable {
         this.url = url;
     }
 
-
-
     public String getTitle() {
         return title;
     }

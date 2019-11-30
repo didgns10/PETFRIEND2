@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.RenderNode;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 
@@ -78,12 +81,15 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mReferncePlace;
     private FirebaseUser user;
 
+    Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottom_navigaion);
+        final ImageView imageView = findViewById(R.id.imageView_title);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -117,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
