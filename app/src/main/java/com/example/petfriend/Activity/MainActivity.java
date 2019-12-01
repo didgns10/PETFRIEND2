@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReferncePlace;
     private FirebaseUser user;
+    private FragmentTransaction fragmentTransaction;
 
     Handler handler = new Handler();
 
@@ -126,10 +127,25 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment());
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        Bundle intent = getIntent().getExtras();
+        if (intent != null){
+            String publisher = intent.getString("publisherid");
+
+            SharedPreferences.Editor editor = getSharedPreferences("PREPS",MODE_PRIVATE).edit();
+            editor.putString("profileid",publisher);
+            editor.apply();
+
+            fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ProfileFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }else{
+            fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+
 
         ImageButton button_menu = (ImageButton) findViewById(R.id.imageButton_menu);
 

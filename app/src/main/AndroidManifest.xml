@@ -20,46 +20,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        <activity android:name=".Activity.Post.PostActivity"></activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Theme.AppCompat"/>
-
-        <!-- //다이어리 -->
-        <activity android:name=".Activity.Menu.Diary_detail_Activity"
-            />
-        <activity android:name=".Activity.Menu.Diary_Update_Activity"
-            />
-        <activity android:name=".Activity.Menu.Diary_Add_Activity"
-           />
-        <activity android:name=".Activity.Menu.Diary_Activity"
-            />
-
-        <!-- //아이디어 부분 -->
-        <activity android:name=".Activity.Idea.Idea_place_set_Activity"
-            />
-        <activity android:name=".Activity.Idea.Idea_PlaceUpdate_Activity"
-            />
-        <activity android:name=".Activity.Idea.Idea_PlaceAdd_Activity"
-            />
-        <activity android:name=".Activity.Idea.Idea_PetAddActivity"
-            ></activity>
-        <activity android:name=".Activity.Idea.Idea_pet_set_Activity"
-            />
-        <activity android:name=".Activity.Idea.Idea_PetUpdateActivity"
-            />
+        <activity android:name=".Activity.Post.CommentsActivity"></activity>
+        <activity android:name=".Activity.Post.PostActivity" />
         <activity
-            android:name=".Activity.Idea.IdeaActivity"
-             />
-        <activity android:name=".Activity.Idea.Idea_pet_Activity"
-            ></activity>
-        <activity android:name=".Activity.Idea.Idea_place_Activity"
-            />
-        <activity android:name=".Activity.Idea.Idea_pet_detail_Activity"
-            />
-
-        <!-- //로그인,회원가입 -->
-
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.AppCompat" /> <!-- //다이어리 -->
+        <activity android:name=".Activity.Menu.Diary_detail_Activity" />
+        <activity android:name=".Activity.Menu.Diary_Update_Activity" />
+        <activity android:name=".Activity.Menu.Diary_Add_Activity" />
+        <activity android:name=".Activity.Menu.Diary_Activity" /> <!-- //아이디어 부분 -->
+        <activity android:name=".Activity.Idea.Idea_place_set_Activity" />
+        <activity android:name=".Activity.Idea.Idea_PlaceUpdate_Activity" />
+        <activity android:name=".Activity.Idea.Idea_PlaceAdd_Activity" />
+        <activity android:name=".Activity.Idea.Idea_PetAddActivity" />
+        <activity android:name=".Activity.Idea.Idea_pet_set_Activity" />
+        <activity android:name=".Activity.Idea.Idea_PetUpdateActivity" />
+        <activity android:name=".Activity.Idea.IdeaActivity" />
+        <activity android:name=".Activity.Idea.Idea_pet_Activity" />
+        <activity android:name=".Activity.Idea.Idea_place_Activity" />
+        <activity android:name=".Activity.Idea.Idea_pet_detail_Activity" /> <!-- //로그인,회원가입 -->
         <activity android:name=".Activity.Login.LodingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,10 +54,7 @@
         <activity android:name=".Activity.Login.IdpwActivity" />
         <activity
             android:name=".Activity.MainActivity"
-            android:launchMode="singleInstance">
-
-
-        </activity>
+            android:launchMode="singleInstance"></activity>
         <activity android:name=".Activity.Newspeed.newspeedActivity" />
         <activity android:name=".Activity.Newspeed.AddnewspeedActivity" />
         <activity android:name=".Activity.Newspeed.newspeed_photo_selectActivity" />
@@ -86,8 +62,7 @@
         <activity android:name=".Activity.Menu.myprofileActivity" />
         <activity android:name=".Activity.Menu.myprofile_editActivity" />
         <activity android:name=".Activity.Menu.optionActivity" />
-        <activity android:name=".Activity.Menu.likeActivity" />
-        <!-- //카메라 부분 -->
+        <activity android:name=".Activity.Menu.likeActivity" /> <!-- //카메라 부분 -->
         <activity android:name=".Activity.Camera.CameraActivity" />
         <activity android:name=".Activity.Camera.GalleryActivity" />
     </application>

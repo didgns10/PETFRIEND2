@@ -54,8 +54,8 @@ public class IdeaActivity extends AppCompatActivity {
 
         ImageButton button_back = (ImageButton) findViewById(R.id.imageButton_back);
 
-         imageView_pet = (ImageView) findViewById(R.id.ImageView_title);
-         imageView_place = (ImageView) findViewById(R.id.ImageView_title_place);
+        imageView_pet = (ImageView) findViewById(R.id.ImageView_title);
+        imageView_place = (ImageView) findViewById(R.id.ImageView_title_place);
 
         mGlideRequestManager = Glide.with(IdeaActivity.this);
         showPet();
@@ -65,17 +65,17 @@ public class IdeaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent4 = new Intent(IdeaActivity.this, MainActivity.class);
-                intent4.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent4.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent4);
                 finish();
             }
         });
 
-        CardView cardView_place = (CardView)findViewById(R.id.cardView_place);
+        CardView cardView_place = (CardView) findViewById(R.id.cardView_place);
         cardView_place.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firebaseUser.getUid().equals("o7WI1MVBkufUvCzoRuu4nynK4ou2")){
+                if (firebaseUser.getUid().equals("o7WI1MVBkufUvCzoRuu4nynK4ou2")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(IdeaActivity.this);
                     builder.setTitle("화면을 선택하세요.");
                     builder.setMessage("관리자모드 또는 일반모드");
@@ -100,19 +100,19 @@ public class IdeaActivity extends AppCompatActivity {
                         }
                     });
                     builder.create().show();
-                }else{
+                } else {
                     Intent intent = new Intent(IdeaActivity.this, Idea_place_Activity.class);
                     startActivity(intent);
-                    Log.e("유저",firebaseUser.getUid());
+                    Log.e("유저", firebaseUser.getUid());
                 }
             }
         });
 
-        CardView cardView_pet = (CardView)findViewById(R.id.cardView_pet);
+        CardView cardView_pet = (CardView) findViewById(R.id.cardView_pet);
         cardView_pet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firebaseUser.getUid().equals("o7WI1MVBkufUvCzoRuu4nynK4ou2")){
+                if (firebaseUser.getUid().equals("o7WI1MVBkufUvCzoRuu4nynK4ou2")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(IdeaActivity.this);
                     builder.setTitle("화면을 선택하세요.");
                     builder.setMessage("관리자모드 또는 일반모드");
@@ -137,15 +137,16 @@ public class IdeaActivity extends AppCompatActivity {
                         }
                     });
                     builder.create().show();
-                }else{
+                } else {
                     Intent intent = new Intent(IdeaActivity.this, Idea_pet_Activity.class);
                     startActivity(intent);
-                    Log.e("유저",firebaseUser.getUid());
+                    Log.e("유저", firebaseUser.getUid());
                 }
             }
         });
     }
-    private void showPet(){
+
+    private void showPet() {
         new PetFireDBHelper().readPet(new PetFireDBHelper.DataStatus() {
             @Override
             public void DataIsLoaded(final ArrayList<Pet> petlist, ArrayList<String> keys) {
@@ -153,9 +154,9 @@ public class IdeaActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while(true){
+                        while (true) {
                             try {
-                                if(IdeaActivity.this != null) {
+                                if (IdeaActivity.this != null) {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -202,7 +203,8 @@ public class IdeaActivity extends AppCompatActivity {
             }
         });
     }
-    private void showplace(){
+
+    private void showplace() {
         new PlaceFireDBHelper().readPlace(new PlaceFireDBHelper.DataStatus() {
             @Override
             public void DataIsLoaded(final ArrayList<Place> placelist, ArrayList<String> keys) {
@@ -210,33 +212,37 @@ public class IdeaActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while(true){
-                            try {
-                                if(IdeaActivity.this != null) {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            imageView_place.setVisibility(View.VISIBLE);
-                                            AnimationSet set = new AnimationSet(true);
-                                            set.setInterpolator(new AccelerateInterpolator());
+                        try {
+                            Thread.sleep(1000);
+                            while (true) {
+                                try {
+                                    if (IdeaActivity.this != null) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                imageView_place.setVisibility(View.VISIBLE);
+                                                mGlideRequestManager.load(placelist.get(i[0]).getPhoto()).into(imageView_place);
+                                                AnimationSet set = new AnimationSet(true);
+                                                set.setInterpolator(new AccelerateInterpolator());
 
-                                            Animation ani01 = new AlphaAnimation(0.0f, 1.0f);
-                                            ani01.setDuration(1000);
-                                            set.addAnimation(ani01);
-
-                                            mGlideRequestManager.load(placelist.get(i[0]).getPhoto()).into(imageView_place);
-                                            imageView_place.setAnimation(set);
-                                            i[0]++;
-                                            if (placelist.size() == i[0]) {
-                                                i[0] = 0;
+                                                Animation ani01 = new AlphaAnimation(0.0f, 1.0f);
+                                                ani01.setDuration(1000);
+                                                set.addAnimation(ani01);
+                                                imageView_place.setAnimation(set);
+                                                i[0]++;
+                                                if (placelist.size() == i[0]) {
+                                                    i[0] = 0;
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
+                                    Thread.sleep(2500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
                                 }
-                                Thread.sleep(2500);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
                             }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
                 }).start();
