@@ -20,7 +20,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.Post.CommentsActivity"></activity>
+        <activity android:name=".Activity.PetLoseUpdateActivity"></activity>
+        <activity android:name=".Activity.PetLoseAddActivity" />
+        <activity android:name=".Activity.PetLoseActivity" />
+        <activity android:name=".Activity.NewsActivity" />
+        <activity android:name=".Activity.Post.CommentsActivity" />
         <activity android:name=".Activity.Post.PostActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
@@ -54,7 +58,7 @@
         <activity android:name=".Activity.Login.IdpwActivity" />
         <activity
             android:name=".Activity.MainActivity"
-            android:launchMode="singleInstance"></activity>
+            android:launchMode="singleInstance" />
         <activity android:name=".Activity.Newspeed.newspeedActivity" />
         <activity android:name=".Activity.Newspeed.AddnewspeedActivity" />
         <activity android:name=".Activity.Newspeed.newspeed_photo_selectActivity" />

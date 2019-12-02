@@ -1,25 +1,19 @@
 package com.example.petfriend.Model;
 
-import java.io.Serializable;
-
-public class Newsdata implements Serializable {
+public class PetLose {
 
     private String title;
     private String urlToImage;
     private String url;
+    private String place;
 
-    public Newsdata(String title, String urlToImage, String url) {
+    public PetLose(){}
+
+    public PetLose(String title, String urlToImage, String url, String place) {
         this.title = title;
         this.urlToImage = urlToImage;
         this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+        this.place = place;
     }
 
     public String getTitle() {
@@ -38,6 +32,19 @@ public class Newsdata implements Serializable {
         this.urlToImage = urlToImage;
     }
 
+    public String getUrl() {
+        return url;
+    }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
 }
