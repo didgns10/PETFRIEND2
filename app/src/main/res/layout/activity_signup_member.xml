@@ -10,13 +10,13 @@
         android:id="@+id/imageView_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@color/colorPrimary" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView_title"
@@ -61,42 +61,43 @@
     <EditText
         android:id="@+id/editText_signup_member_phone"
         android:layout_width="225dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:hint="'-' 없이 전화번호를 입력해주세요"
+        android:hint="간단한 자기소개를 입력해주세요."
+        android:inputType="phone"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
-        android:inputType="phone"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/editText_signup_member_nick"
-        app:layout_constraintTop_toBottomOf="@id/editText_signup_member_nick" />
+        app:layout_constraintEnd_toEndOf="@+id/editText_signup_member_address"
+        app:layout_constraintStart_toStartOf="@+id/editText_signup_member_address"
+        app:layout_constraintTop_toBottomOf="@+id/editText_signup_member_address" />
 
     <TextView
         android:id="@+id/textView_phonenum"
-        android:layout_width="67dp"
+        android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:layout_marginTop="60dp"
-        android:text="전화번호 :"
+        android:text="자기소개:"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="@+id/textView_id"
-        app:layout_constraintStart_toStartOf="@+id/textView_id"
-        app:layout_constraintTop_toBottomOf="@+id/textView_id" />
+        app:layout_constraintEnd_toEndOf="@+id/textView_nick"
+        app:layout_constraintStart_toStartOf="@+id/textView_nick"
+        app:layout_constraintTop_toBottomOf="@+id/textView_nick" />
 
     <EditText
         android:id="@+id/editText_signup_member_address"
         android:layout_width="225dp"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:hint="주소를 입력해주세요"
+        android:inputType="textEmailAddress"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
-        android:inputType="textEmailAddress"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/editText_signup_member_phone"
-        app:layout_constraintStart_toStartOf="@id/editText_signup_member_phone"
-        app:layout_constraintTop_toBottomOf="@id/editText_signup_member_phone" />
+        app:layout_constraintEnd_toEndOf="@+id/editText_signup_member_nick"
+        app:layout_constraintStart_toStartOf="@+id/editText_signup_member_nick"
+        app:layout_constraintTop_toBottomOf="@+id/editText_signup_member_nick" />
 
     <TextView
         android:id="@+id/textView_nick"
@@ -105,9 +106,9 @@
         android:layout_marginTop="60dp"
         android:text="주소 :"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="@+id/textView_phonenum"
-        app:layout_constraintStart_toStartOf="@+id/textView_phonenum"
-        app:layout_constraintTop_toBottomOf="@+id/textView_phonenum" />
+        app:layout_constraintEnd_toEndOf="@+id/textView_id"
+        app:layout_constraintStart_toStartOf="@+id/textView_id"
+        app:layout_constraintTop_toBottomOf="@+id/textView_id" />
 
     <Button
         android:id="@+id/button_info"
@@ -175,8 +176,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@color/colorPupple"
-                android:textColor="@android:color/white"
                 android:text="갤러리"
+                android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <Button
@@ -185,10 +186,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:textColor="@android:color/white"
                 android:layout_weight="1"
                 android:background="@color/colorPupple"
                 android:text="카메라"
+                android:textColor="@android:color/white"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -204,4 +205,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -174,7 +174,7 @@ public class Signup_MemberActivity extends AppCompatActivity {
         final String address = ((EditText)findViewById(R.id.editText_signup_member_address)).getText().toString();
 
 
-        if(address.length() > 0 && nickname.length() >0 && phone_num.length() >9){
+        if(address.length() > 0 && nickname.length() >0 && phone_num.length() >0){
             loaderlayout.setVisibility(View.VISIBLE);
             FirebaseStorage storage = FirebaseStorage.getInstance();
             // Create a storage reference from our app
