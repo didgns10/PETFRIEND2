@@ -20,10 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.PetLoseUpdateActivity"></activity>
-        <activity android:name=".Activity.PetLoseAddActivity" />
-        <activity android:name=".Activity.PetLoseActivity" />
-        <activity android:name=".Activity.NewsActivity" />
+        <activity android:name=".Activity.Game.GameoverActivity"></activity>
+        <activity android:name=".Activity.Game.GameActivity" ></activity>
+        <activity android:name=".Activity.Any.PetLoseUpdateActivity" />
+        <activity android:name=".Activity.Any.PetLoseAddActivity" />
+        <activity android:name=".Activity.Any.PetLoseActivity" />
+        <activity android:name=".Activity.Any.NewsActivity" />
         <activity android:name=".Activity.Post.CommentsActivity" />
         <activity android:name=".Activity.Post.PostActivity" />
         <activity

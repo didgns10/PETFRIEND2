@@ -15,11 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.petfriend.Activity.Idea.Idea_PetUpdateActivity;
-import com.example.petfriend.Activity.PetLoseUpdateActivity;
-import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
-import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetFireDBHelper;
+import com.example.petfriend.Activity.Any.PetLoseUpdateActivity;
 import com.example.petfriend.Model.PetLose;
 import com.example.petfriend.Model.PetLoseFireDBHelper;
 import com.example.petfriend.R;

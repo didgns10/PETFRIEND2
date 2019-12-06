@@ -92,7 +92,7 @@ public class ProfileFragment extends Fragment {
         myFotos();
 
         if(profileid.equals(firebaseUser.getUid())){
-            edit_profile.setText("Edit Profile");
+            edit_profile.setText("프로필 수정");
         }else{
             checkFollow();
             saved_fotos.setVisibility(View.GONE);
@@ -104,15 +104,15 @@ public class ProfileFragment extends Fragment {
                 String btn = edit_profile.getText().toString();
 
                 //버튼이 edit pofile 이면
-                if(btn.equals("Edit Profile")){
+                if(btn.equals("프로필 수정")){
 
-                }else if(btn.equals("follow")){ //버튼이 follow 면
+                }else if(btn.equals("팔로우")){ //버튼이 follow 면
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
                             .child("followers").child(firebaseUser.getUid()).setValue(true);
 
-                }else if(btn.equals("following")){
+                }else if(btn.equals("팔로잉")){
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
@@ -153,9 +153,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child(profileid).exists()){
-                    edit_profile.setText("following");
+                    edit_profile.setText("팔로잉");
                 }else{
-                    edit_profile.setText("follow");
+                    edit_profile.setText("팔로우");
                 }
             }
 

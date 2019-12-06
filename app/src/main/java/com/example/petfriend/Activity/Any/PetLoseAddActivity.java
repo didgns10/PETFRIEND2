@@ -1,4 +1,4 @@
-package com.example.petfriend.Activity;
+package com.example.petfriend.Activity.Any;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.petfriend.Activity.Idea.Idea_PetAddActivity;
-import com.example.petfriend.Activity.Idea.Idea_pet_Activity;
-import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.Model.PetLose;
 import com.example.petfriend.Model.PetLoseFireDBHelper;
 import com.example.petfriend.R;

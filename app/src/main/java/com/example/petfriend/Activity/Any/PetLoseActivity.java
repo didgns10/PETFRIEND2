@@ -1,4 +1,4 @@
-package com.example.petfriend.Activity;
+package com.example.petfriend.Activity.Any;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,13 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
-import com.example.petfriend.Activity.Idea.IdeaActivity;
-import com.example.petfriend.Activity.Idea.Idea_PetAddActivity;
-import com.example.petfriend.Activity.Idea.Idea_pet_set_Activity;
-import com.example.petfriend.Adapter.Pet.ItemPetAdapter;
+import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Adapter.PetLoseAdpater;
-import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.Model.PetLose;
 import com.example.petfriend.Model.PetLoseFireDBHelper;
 import com.example.petfriend.R;

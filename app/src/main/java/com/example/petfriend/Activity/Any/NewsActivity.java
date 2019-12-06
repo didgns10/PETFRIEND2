@@ -1,4 +1,4 @@
-package com.example.petfriend.Activity;
+package com.example.petfriend.Activity.Any;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.petfriend.Activity.Idea.IdeaActivity;
+import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Adapter.PetNewsAdapter;
 import com.example.petfriend.Model.Newsdata;
 import com.example.petfriend.R;

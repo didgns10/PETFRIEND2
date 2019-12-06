@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
@@ -17,10 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,17 +24,12 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.bumptech.glide.Glide;
+import com.example.petfriend.Activity.Game.GameActivity;
 import com.example.petfriend.Activity.Idea.IdeaActivity;
-import com.example.petfriend.Activity.Idea.Idea_place_Activity;
-import com.example.petfriend.Activity.Idea.Idea_place_set_Activity;
-import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Activity.Menu.Diary_Activity;
-import com.example.petfriend.Activity.NewsActivity;
-import com.example.petfriend.Activity.PetLoseActivity;
-import com.example.petfriend.Adapter.PetNewsAdapter;
+import com.example.petfriend.Activity.Any.NewsActivity;
+import com.example.petfriend.Activity.Any.PetLoseActivity;
 import com.example.petfriend.Model.Newsdata;
-import com.example.petfriend.Model.Pet;
-import com.example.petfriend.Model.PetFireDBHelper;
 import com.example.petfriend.Model.PetLose;
 import com.example.petfriend.Model.PetLoseFireDBHelper;
 import com.example.petfriend.R;
@@ -52,7 +43,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -113,39 +103,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        layout = (LinearLayout)rootView.findViewById(R.id.layout);
-       /* layout.setOnClickListener(new View.OnClickListener() {
+        layout = (LinearLayout)rootView.findViewById(R.id.layout_game);
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (firebaseUser.getUid().equals("o7WI1MVBkufUvCzoRuu4nynK4ou2")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("화면을 선택하세요.");
-                    builder.setMessage("관리자모드 또는 일반모드");
-                    builder.setPositiveButton("관리자모드", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(getActivity(), PetLoseActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                    builder.setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton("일반모드", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    builder.create().show();
-                } else {
-                }
+                Intent intent = new Intent(getActivity(), GameActivity.class);
+                startActivity(intent);
             }
-        });*/
-
+        });
 
         textView = (TextView)rootView.findViewById(R.id.tv_news_title);
         animTransUp = AnimationUtils.loadAnimation(getActivity(),R.anim.anim_traslate_up);
