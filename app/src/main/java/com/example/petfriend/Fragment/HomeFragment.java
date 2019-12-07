@@ -243,7 +243,7 @@ public class HomeFragment extends Fragment {
                 int mElementSize = mElementDataSize.size(); //목록이 몇개인지 알아낸다. 그만큼 루프를 돌려야 하나깐.
 
                 for(Element elem : mElementDataSize){ //이렇게 요긴한 기능이
-                    //영화목록 <li> 에서 다시 원하는 데이터를 추출해 낸다.
+                    //목록 <li> 에서 다시 원하는 데이터를 추출해 낸다.
 
 
                     String my_title = elem.select("li a h3[class=title]").text();

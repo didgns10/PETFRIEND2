@@ -51,13 +51,12 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final GameScore gameScore = mGameScore.get(position);
 
-       getUserInfo(holder.imageView_profile,holder.username, gameScore.getPublisher());
+        getUserInfo(holder.imageView_profile, holder.username, gameScore.getPublisher());
 
-       //전체 사이즈에서 현재 포지션을 빼서 순위를 매겼다 왜냐하면 엑티비티에서 데이터 쿼리가 오름차순이여서 이거를 역순으로 하고 싶어서
-        //리사이클러뷰를 역순으로 바꿨다. 그렇기 때문에 이작업이 필요하다.
-        holder.tv_rank.setText(getItemCount()- position+"");
+        holder.tv_rank.setText(position + 1 + "");
 
-       holder.score.setText(gameScore.getScore()+"");
+        holder.score.setText(gameScore.getScore() + "");
+        holder.tv_game_talk.setText("님의 최고점수");
 
     }
 
@@ -69,7 +68,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView_profile;
-        public TextView username, score , tv_rank;
+        public TextView username, score , tv_rank , tv_game_talk;;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +76,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
             username = itemView.findViewById(R.id.tv_name);
             score = itemView.findViewById(R.id.tv_score);
             tv_rank = itemView.findViewById(R.id.tv_rank);
+            tv_game_talk = itemView.findViewById(R.id.tv_game_talk);
         }
     }
     private void getUserInfo(final ImageView imageView, final TextView username, String publisherid){

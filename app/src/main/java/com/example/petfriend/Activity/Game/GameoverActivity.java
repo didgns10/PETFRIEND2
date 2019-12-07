@@ -85,7 +85,7 @@ public class GameoverActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("score").child(firebaseUser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("score", getScore);
+        hashMap.put("score", -getScore);
         hashMap.put("publisher",firebaseUser.getUid());
 
         reference.setValue(hashMap);

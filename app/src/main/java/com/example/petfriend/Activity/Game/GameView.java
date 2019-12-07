@@ -127,7 +127,7 @@ public class GameView extends View {
 
         //Blue
         blueX -= blueSpeed;
-        if(hitCheck(blueX,blueY)){
+        if(hitCheck(blueX,blueY,bluePaint.getWidth(),bluePaint.getHeight())){
             score += 10;
             blueX = - 100;
         }
@@ -139,7 +139,7 @@ public class GameView extends View {
 
         //Black
         blackX -= blackSpeed;
-        if(hitCheck(blackX,blackY)){
+        if(hitCheck(blackX,blackY,blackPaint.getWidth(),blackPaint.getHeight())){
             blackX = -100;
             life_count--;
             if(life_count == 0){
@@ -176,9 +176,10 @@ public class GameView extends View {
 
     }
 
-    public  boolean hitCheck(int x, int y){
-        if(birdX < x &&  x < (birdX + bird[0].getWidth()) &&
-                birdY < y &&  y < (birdY + bird[0].getHeight())){
+    public  boolean hitCheck(int x, int y, int x1, int y1){
+        if((birdX < x &&  x < (birdX + bird[0].getWidth()) &&
+                birdY < y &&  y < (birdY + bird[0].getHeight())) || (birdX < x1 &&  x1 < (birdX + bird[0].getWidth()) &&
+                birdY < y1 &&  y1 < (birdY + bird[0].getHeight()))){
             return  true;
         }
         return false;

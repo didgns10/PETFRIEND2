@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.petfriend.Adapter.GameAdapter;
 import com.example.petfriend.Model.GameScore;
@@ -48,11 +49,10 @@ public class GameActivity extends AppCompatActivity {
 
         activity = GameActivity.this;
 
+
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         gameScoreList = new ArrayList<>();
         gameAdapter = new GameAdapter(this, gameScoreList);

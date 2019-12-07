@@ -11,7 +11,6 @@
         android:id="@+id/tv_rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
         android:textColor="@android:color/holo_red_light"
         android:textStyle="bold"
         android:textSize="20dp"
@@ -24,7 +23,6 @@
         android:layout_marginEnd="16dp"
         android:layout_toEndOf="@+id/tv_rank"
         android:layout_toRightOf="@+id/tv_rank"
-        android:src="@color/colorAccent"
         android:layout_marginRight="16dp" />
 
     <LinearLayout
@@ -40,16 +38,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Mountaint Name"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/tv_game_talk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="님의 최고점수 -   "
             android:textColor="@android:color/black"
             android:layout_marginLeft="5dp"/>
 
@@ -57,7 +53,6 @@
             android:id="@+id/tv_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8,000 m"
             android:textColor="@android:color/black" />
 
     </LinearLayout>

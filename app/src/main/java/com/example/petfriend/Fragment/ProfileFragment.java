@@ -1,6 +1,7 @@
 package com.example.petfriend.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.petfriend.Activity.Post.ProfileEditActivity;
 import com.example.petfriend.Adapter.Post.MyFotoAdapter;
 import com.example.petfriend.Model.MemberInfo;
 import com.example.petfriend.Model.Post;
@@ -44,6 +46,12 @@ public class ProfileFragment extends Fragment {
     TextView posts, followers, following, fullname, bio, username;
     Button edit_profile;
 
+    private List<String> mysaves;
+    RecyclerView recyclerView_saves;
+    MyFotoAdapter myFotoAdapter_saves;
+    List<Post> postList_saves;
+
+
     FirebaseUser firebaseUser;
     String profileid;
 
@@ -55,7 +63,7 @@ public class ProfileFragment extends Fragment {
 
     public ProfileFragment(){}
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -85,11 +93,23 @@ public class ProfileFragment extends Fragment {
         myFotoAdapter = new MyFotoAdapter(getContext(), postList);
         recyclerView.setAdapter(myFotoAdapter);
 
+        recyclerView_saves = view.findViewById(R.id.recycler_view_save);
+        recyclerView_saves.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_saves = new GridLayoutManager(getContext(), 3);
+        recyclerView_saves.setLayoutManager(linearLayoutManager_saves);
+        postList_saves = new ArrayList<>();
+        myFotoAdapter_saves = new MyFotoAdapter(getContext(), postList_saves);
+        recyclerView_saves.setAdapter(myFotoAdapter_saves);
+
+        recyclerView.setVisibility(View.VISIBLE);
+        recyclerView_saves.setVisibility(View.GONE);
+
 
         userInfo();
         getFollowers();
         getNrPosts();
         myFotos();
+        mysaves();
 
         if(profileid.equals(firebaseUser.getUid())){
             edit_profile.setText("프로필 수정");
@@ -105,7 +125,8 @@ public class ProfileFragment extends Fragment {
 
                 //버튼이 edit pofile 이면
                 if(btn.equals("프로필 수정")){
-
+                    Intent intent = new Intent(getContext(), ProfileEditActivity.class);
+                    startActivity(intent);
                 }else if(btn.equals("팔로우")){ //버튼이 follow 면
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileid).setValue(true);
@@ -120,7 +141,21 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+        my_fotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.VISIBLE);
+                recyclerView_saves.setVisibility(View.GONE);
+            }
+        });
 
+        saved_fotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.GONE);
+                recyclerView_saves.setVisibility(View.VISIBLE);
+            }
+        });
         return view;
     }
 
@@ -246,5 +281,48 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private void mysaves(){
+        mysaves = new ArrayList<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Saves")
+                .child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    mysaves.add(snapshot.getKey());
+                }
+                readSaves();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void readSaves(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList_saves.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Post post = snapshot.getValue(Post.class);
+
+                    for(String id : mysaves){
+                        if(post.getPostid().equals(id)){
+                            postList_saves.add(post);
+                        }
+                    }
+                }
+                myFotoAdapter_saves.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }
