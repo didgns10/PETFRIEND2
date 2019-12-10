@@ -3,6 +3,8 @@
     package="com.example.petfriend">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -20,7 +22,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.Post.ProfileEditActivity"></activity>
+        <activity android:name=".Activity.Map.NewActivity"></activity>
+        <activity android:name=".Activity.Map.MapsActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCgrRJNkT3JxDZXIpRro6vyoFc2FOH3xRU" />
+
+        <activity android:name=".Activity.Map.GoolgleMapActivity">
+        </activity>
+        <activity android:name=".Activity.Post.FollowersActivity" />
+        <activity android:name=".Activity.Post.ProfileEditActivity" />
         <activity android:name=".Activity.Game.GameoverActivity" />
         <activity android:name=".Activity.Game.GameActivity" />
         <activity android:name=".Activity.Any.PetLoseUpdateActivity" />
@@ -46,7 +58,7 @@
         <activity android:name=".Activity.Idea.Idea_pet_Activity" />
         <activity android:name=".Activity.Idea.Idea_place_Activity" />
         <activity android:name=".Activity.Idea.Idea_pet_detail_Activity" /> <!-- //로그인,회원가입 -->
-        <activity android:name=".Activity.Login.LodingActivity">
+        <activity android:name=".Activity.Login.LodingActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

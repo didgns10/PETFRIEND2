@@ -1,6 +1,7 @@
 package com.example.petfriend.Adapter.User;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Activity.Menu.myprofileActivity;
 import com.example.petfriend.Fragment.ProfileFragment;
 import com.example.petfriend.Model.MemberInfo;
@@ -28,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.auth.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -37,12 +40,14 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private DatabaseReference mReferncePlace;
     private Context mContext;
     private List<MemberInfo> mUsers;
+    private boolean isfragment;
 
     private FirebaseUser firebaseUser;
 
-    public UserAdapter(Context mContext, List<MemberInfo> mUsers) {
+    public UserAdapter(Context mContext, List<MemberInfo> mUsers,boolean isfragment) {
         this.mContext = mContext;
         this.mUsers = mUsers;
+        this.isfragment =isfragment;
     }
 
     @NonNull
@@ -71,12 +76,18 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit() ;
-                editor.putString("profileid",user.getId());
-                editor.apply();
+                if(isfragment) {
+                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                    editor.putString("profileid", user.getId());
+                    editor.apply();
 
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                    ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ProfileFragment()).commit();
+                }else{
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    intent.putExtra("publisherid",user.getId());
+                    mContext.startActivity(intent);
+                }
             }
         });
 
@@ -88,6 +99,8 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
                             .child("following").child(user.getId()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("followers").child(firebaseUser.getUid()).setValue(true);
+
+                    addNotifications(user.getId());
                 }else{
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(user.getId()).removeValue();
@@ -97,6 +110,17 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
             }
         });
 
+    }
+    private void addNotifications(String userid) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userid", firebaseUser.getUid());
+        hashMap.put("text", "당신을 팔로우 합니다.");
+        hashMap.put("postid", "");
+        hashMap.put("ispost", false);
+
+        reference.push().setValue(hashMap);
     }
 
     @Override

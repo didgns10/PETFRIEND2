@@ -1,6 +1,8 @@
 package com.example.petfriend.Adapter.Post;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +21,15 @@ import com.example.petfriend.Activity.Post.CommentsActivity;
 import com.example.petfriend.Model.Comment;
 import com.example.petfriend.Model.MemberInfo;
 import com.example.petfriend.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
@@ -35,12 +41,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     private Context mContext;
     private List<Comment> mComment;
+    private String postid;
 
     private FirebaseUser firebaseUser;
 
-    public CommentAdapter(Context mContext, List<Comment> mComment){
+    public CommentAdapter(Context mContext, List<Comment> mComment,String postid){
         this.mComment = mComment;
         this.mContext = mContext;
+        this.postid = postid;
     }
 
 
@@ -82,6 +90,42 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 mContext.startActivity(intent);
             }
         });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(comment.getPublisher().equals(firebaseUser.getUid())){
+                    AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+                    alertDialog.setTitle("댓글을 삭제 하시겠습니까?");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    FirebaseDatabase.getInstance().getReference("Comments")
+                                            .child(postid).child(comment.getCommentid())
+                                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(mContext,"댓글이 삭제되었습니다.",Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+                }
+                return false;
+            }
+        });
 
 
     }
@@ -116,6 +160,25 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 MemberInfo user = dataSnapshot.getValue(MemberInfo.class);
                 Glide.with(mContext).load(user.getPhotoUrl()).into(imageView);
                 username.setText(user.getNickname());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void removeNotications(String userid, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+        Query query = reference.orderByChild("postid").equalTo(postid);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    dataSnapshot.getRef().removeValue();
+                }
             }
 
             @Override

@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 
+import com.example.petfriend.Activity.Any.NewsActivity;
 import com.example.petfriend.Activity.Idea.IdeaActivity;
 import com.example.petfriend.Activity.Login.LoginActivity;
 import com.example.petfriend.Activity.Login.Signup_MemberActivity;
@@ -134,13 +135,9 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, Diary_Activity.class);
                                 startActivity(intent);
                                 break;
-                            case R.id.like_baguni:
-                                Intent intent3 = new Intent(MainActivity.this, likeActivity.class);
+                            case R.id.news:
+                                Intent intent3 = new Intent(MainActivity.this, NewsActivity.class);
                                 startActivity(intent3);
-                                break;
-                            case R.id.my_profile:
-                                Intent intent1 = new Intent(MainActivity.this, myprofileActivity.class);
-                                startActivity(intent1);
                                 break;
                             case R.id.option:
                                 Intent intent2 = new Intent(MainActivity.this, optionActivity.class);
