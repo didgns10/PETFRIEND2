@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
@@ -18,24 +20,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.Game.GameActivity;
 import com.example.petfriend.Activity.Idea.IdeaActivity;
+import com.example.petfriend.Activity.Map.GoolgleMapActivity;
 import com.example.petfriend.Activity.Menu.Diary_Activity;
 import com.example.petfriend.Activity.Any.NewsActivity;
 import com.example.petfriend.Activity.Any.PetLoseActivity;
+import com.example.petfriend.Adapter.WeatherAdapter;
+import com.example.petfriend.Model.Gloval;
 import com.example.petfriend.Model.Newsdata;
 import com.example.petfriend.Model.PetLose;
 import com.example.petfriend.Model.PetLoseFireDBHelper;
+import com.example.petfriend.Model.Weather;
 import com.example.petfriend.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -43,6 +58,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class HomeFragment extends Fragment {
 
@@ -64,6 +82,9 @@ public class HomeFragment extends Fragment {
     private TextView tv_dog_title;
     private ImageView img_dog;
     private LinearLayout layout;
+    private ImageButton img_googlemap;
+    private double lat ;
+    private double lon ;
 
     public HomeFragment(){
 
@@ -76,34 +97,10 @@ public class HomeFragment extends Fragment {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        ImageView img_idea = (ImageView)rootView.findViewById(R.id.img_pet);
-        ImageView img_news = (ImageView)rootView.findViewById(R.id.img_news);
-        ImageView img_diary = (ImageView)rootView.findViewById(R.id.img_diary);
+        mRrecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
-        img_idea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent4 = new Intent(getActivity(), IdeaActivity.class);
-                startActivity(intent4);
-            }
-        });
-        img_news.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent4 = new Intent(getActivity(), NewsActivity.class);
-                startActivity(intent4);
-            }
-        });
-
-        img_diary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent4 = new Intent(getActivity(), Diary_Activity.class);
-                startActivity(intent4);
-            }
-        });
-
-        layout = (LinearLayout)rootView.findViewById(R.id.layout_game);
+        img_googlemap = rootView.findViewById(R.id.img_googlemap);
+        layout = (LinearLayout) rootView.findViewById(R.id.layout_game);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,15 +109,38 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        textView = (TextView)rootView.findViewById(R.id.tv_news_title);
-        animTransUp = AnimationUtils.loadAnimation(getActivity(),R.anim.anim_traslate_up);
+        textView = (TextView) rootView.findViewById(R.id.tv_news_title);
+        animTransUp = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_traslate_up);
 
-        img_dog = (ImageView)rootView.findViewById(R.id.img_dog);
-        tv_dog_title = (TextView)rootView.findViewById(R.id.tv_dog_title);
-        tv_dog_place = (TextView)rootView.findViewById(R.id.tv_dog_place);
-        layout = (LinearLayout)rootView.findViewById(R.id.layout);
+        img_dog = (ImageView) rootView.findViewById(R.id.img_dog);
+        tv_dog_title = (TextView) rootView.findViewById(R.id.tv_dog_title);
+        tv_dog_place = (TextView) rootView.findViewById(R.id.tv_dog_place);
+        layout = (LinearLayout) rootView.findViewById(R.id.layout);
+
+        mRrecyclerView.setHasFixedSize(true);
 
 
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRrecyclerView.setLayoutManager(mLayoutManager);
+
+        queue = Volley.newRequestQueue(getContext());
+
+        if (Gloval.getState() != null) {
+            lat = Gloval.getLatitude();
+            lon = Gloval.getLongitude();
+        } else {
+            lat = 37.57;
+            lon = 126.98;
+        }
+        img_googlemap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), GoolgleMapActivity.class);
+                startActivity(intent);
+            }
+        });
+        getWeather();
         showPet();
         new Description().execute();
 
@@ -312,4 +332,67 @@ public class HomeFragment extends Fragment {
             progressDialog.dismiss();
         }
     }
+    public void getWeather() {
+
+        String url ="https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&APPID=5784f313fc0b1ea7e15c66bdb9c0158f&mode=json&units=metric&cnt=15";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d("NEWS",response);
+
+                        try {
+                            JSONObject jsonObj = new JSONObject(response);
+
+                            JSONObject obj1 = jsonObj.getJSONObject("main");
+                            String json = jsonObj.getString("name");
+
+                            JSONArray arrayarticles = jsonObj.getJSONArray("weather");
+
+                            //response -> NewsData 클래스 에다가 분류
+                            List<Weather> weathers = new ArrayList<>();
+
+                            Weather weather = new Weather();
+                            for(int i = 0, j = arrayarticles.length(); i < j ; i++ ){
+
+                                JSONObject obj = arrayarticles.getJSONObject(i);
+
+                                Log.d("weather",obj.toString());
+
+                                weather.setId(obj.getString("id"));
+                                weather.setDescription(obj.getString("description"));
+                            }
+                            //   weather.setCity(jsonObj.getString("name"));
+                            weather.setTemp(obj1.getString("temp"));
+                            Log.d("temp",obj1.toString());
+                            weather.setTemp_max(obj1.getString("temp_max"));
+                            weather.setTemp_min(obj1.getString("temp_min"));
+                            weather.setCity(json);
+                            Log.d("name",json);
+                            weathers.add(weather);
+
+                            // specify an adapter (see also next example)
+                            mAdapter = new WeatherAdapter(weathers, getContext());
+                            mRrecyclerView.setAdapter(mAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
+
 }

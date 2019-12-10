@@ -5,11 +5,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -25,6 +27,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.petfriend.Activity.MainActivity;
+import com.example.petfriend.Fragment.HomeFragment;
+import com.example.petfriend.Model.Gloval;
 import com.example.petfriend.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -189,7 +193,7 @@ public class GoolgleMapActivity extends AppCompatActivity implements OnMapReadyC
                 MarkerOptions mOptions = new MarkerOptions();
                 // 마커 타이틀
 
-                mOptions.title("마커 좌표");
+                mOptions.title("현재 위치가 맞으면 이 메세지를 한번더 클릭하세요");
                 Double latitude = latLng.latitude; // 위도
                 Double longitude = latLng.longitude; // 경도
                 Log.d("current",latitude+"  "+longitude);
@@ -215,14 +219,17 @@ public class GoolgleMapActivity extends AppCompatActivity implements OnMapReadyC
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(getBaseContext(),NewActivity.class);
+
                 double latitude = position.latitude;
                 double longt = position.longitude;
 
-                intent.putExtra("latitude",latitude);
-                intent.putExtra("longt",longt);
-
+                Gloval.setLatitude(latitude);
+                Gloval.setLongitude(longt);
+                Gloval.setState("true");
+                Intent intent = new Intent(GoolgleMapActivity.this,MainActivity.class);
                 startActivity(intent);
+                finish();
+
             }
         });
     }

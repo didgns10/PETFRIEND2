@@ -22,7 +22,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.Map.NewActivity"></activity>
         <activity android:name=".Activity.Map.MapsActivity" />
 
         <meta-data

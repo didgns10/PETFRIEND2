@@ -29,6 +29,7 @@ import com.example.petfriend.Fragment.NewspeedFragment;
 import com.example.petfriend.Fragment.NotificationFragment;
 import com.example.petfriend.Fragment.ProfileFragment;
 import com.example.petfriend.Fragment.SearchFragment;
+import com.example.petfriend.Model.Gloval;
 import com.example.petfriend.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mReferncePlace;
     private FirebaseUser user;
     private FragmentTransaction fragmentTransaction;
+    private double latitude ;
+    private double longitude ;
 
     Handler handler = new Handler();
 
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_navigaion);
         final ImageView imageView = findViewById(R.id.imageView_title);
-
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
         Bundle intent = getIntent().getExtras();
@@ -113,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
-
 
         ImageButton button_menu = (ImageButton) findViewById(R.id.imageButton_menu);
 
@@ -190,5 +192,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(Gloval.getState() !=null){
+            fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+    }
 }
 
