@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Adapter.User.UserAdapter;
 import com.example.petfriend.Model.MemberInfo;
 import com.example.petfriend.R;
@@ -50,6 +51,7 @@ public class FollowersActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent1 = new Intent(FollowersActivity.this, MainActivity.class);
                 finish();
             }
         });

@@ -22,13 +22,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.Menu.YoutubeDetailsActivity"></activity>
+        <activity
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:name=".Activity.Menu.YoutubeDetailsActivity"></activity>
         <activity android:name=".Activity.Menu.YoutubeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.Map.MapsActivity" />
 
@@ -64,7 +62,13 @@
         <activity android:name=".Activity.Idea.Idea_pet_Activity" />
         <activity android:name=".Activity.Idea.Idea_place_Activity" />
         <activity android:name=".Activity.Idea.Idea_pet_detail_Activity" /> <!-- //로그인,회원가입 -->
-        <activity android:name=".Activity.Login.LodingActivity"></activity>
+        <activity android:name=".Activity.Login.LodingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activity.Login.LoginActivity"
             android:launchMode="singleInstance" />

@@ -211,7 +211,7 @@ public class GoolgleMapActivity extends AppCompatActivity implements OnMapReadyC
 
                 position = mOptions.getPosition();
 
-                Toast.makeText(GoolgleMapActivity.this, "Lat " + position.latitude + " " + "Long " + position.longitude, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GoolgleMapActivity.this, "마커를 클릭하세요", Toast.LENGTH_SHORT).show();
             }
         });
 
