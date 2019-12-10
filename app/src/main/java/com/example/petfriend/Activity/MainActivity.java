@@ -21,6 +21,7 @@ import com.example.petfriend.Activity.Idea.IdeaActivity;
 import com.example.petfriend.Activity.Login.LoginActivity;
 import com.example.petfriend.Activity.Login.Signup_MemberActivity;
 import com.example.petfriend.Activity.Menu.Diary_Activity;
+import com.example.petfriend.Activity.Menu.YoutubeActivity;
 import com.example.petfriend.Activity.Menu.likeActivity;
 import com.example.petfriend.Activity.Menu.myprofileActivity;
 import com.example.petfriend.Activity.Menu.optionActivity;
@@ -136,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.diary:
                                 Intent intent = new Intent(MainActivity.this, Diary_Activity.class);
                                 startActivity(intent);
+                                break;
+                            case R.id.youtube:
+                                Intent intent1 = new Intent(MainActivity.this, YoutubeActivity.class);
+                                startActivity(intent1);
                                 break;
                             case R.id.news:
                                 Intent intent3 = new Intent(MainActivity.this, NewsActivity.class);

@@ -4,6 +4,8 @@
         android:title="펫 정보"/>
     <item android:id="@+id/diary"
         android:title="펫 다이어리"/>
+    <item android:id="@+id/youtube"
+        android:title="펫 동영상"/>
     <item android:id="@+id/news"
             android:title="뉴스"/>
     <item android:id="@+id/option"
