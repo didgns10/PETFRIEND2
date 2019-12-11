@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,12 +32,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.Game.GameActivity;
-import com.example.petfriend.Activity.Idea.IdeaActivity;
 import com.example.petfriend.Activity.Map.GoolgleMapActivity;
-import com.example.petfriend.Activity.Menu.Diary_Activity;
-import com.example.petfriend.Activity.Any.NewsActivity;
 import com.example.petfriend.Activity.Any.PetLoseActivity;
-import com.example.petfriend.Adapter.WeatherAdapter;
+import com.example.petfriend.Adapter.Any.WeatherAdapter;
 import com.example.petfriend.Model.Gloval;
 import com.example.petfriend.Model.Newsdata;
 import com.example.petfriend.Model.PetLose;
@@ -59,8 +55,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class HomeFragment extends Fragment {
 

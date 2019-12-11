@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Activity.Menu.myprofileActivity;
+import com.example.petfriend.Activity.Post.FollowersActivity;
 import com.example.petfriend.Fragment.ProfileFragment;
 import com.example.petfriend.Model.MemberInfo;
 import com.example.petfriend.R;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.auth.User;
 
@@ -41,6 +43,7 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context mContext;
     private List<MemberInfo> mUsers;
     private boolean isfragment;
+    FollowersActivity followersActivity;
 
     private FirebaseUser firebaseUser;
 
@@ -85,8 +88,9 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
                             new ProfileFragment()).commit();
                 }else{
                     Intent intent = new Intent(mContext, MainActivity.class);
-                    intent.putExtra("publisherid",user.getId());
+                    intent.putExtra("publisherid", user.getId());
                     mContext.startActivity(intent);
+                    followersActivity.finish();
                 }
             }
         });
@@ -106,6 +110,8 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
                             .child("following").child(user.getId()).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("followers").child(firebaseUser.getUid()).removeValue();
+
+                    removeNotications(user.getId(),firebaseUser.getUid());
                 }
             }
         });
@@ -121,6 +127,25 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
         hashMap.put("ispost", false);
 
         reference.push().setValue(hashMap);
+    }
+    private void removeNotications(String userid, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+        Query query = reference.orderByChild("userid").equalTo(postid);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    dataSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -140,6 +165,7 @@ public class UserAdapter extends  RecyclerView.Adapter<UserAdapter.ViewHolder> {
             username = itemView.findViewById(R.id.username);
             image_profile = itemView.findViewById(R.id.image_profile);
             btn_follow = itemView.findViewById(R.id.btn_follow);
+            followersActivity = (FollowersActivity) FollowersActivity.activity1;
 
         }
     }

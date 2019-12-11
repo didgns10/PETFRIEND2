@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ import com.example.petfriend.Activity.Menu.YoutubeActivity;
 import com.example.petfriend.Activity.Menu.likeActivity;
 import com.example.petfriend.Activity.Menu.myprofileActivity;
 import com.example.petfriend.Activity.Menu.optionActivity;
+import com.example.petfriend.Activity.Post.FollowersActivity;
+import com.example.petfriend.Activity.Post.ProfileEditActivity;
 import com.example.petfriend.Fragment.HomeFragment;
 import com.example.petfriend.Fragment.NewspeedFragment;
 import com.example.petfriend.Fragment.NotificationFragment;
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private double latitude ;
     private double longitude ;
 
+    public static Activity activity3;
+
     Handler handler = new Handler();
 
     @Override
@@ -66,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+
+        activity3 = MainActivity.this;
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -100,10 +108,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
         Bundle intent = getIntent().getExtras();
+        Log.d("intent",""+intent);
         if (intent != null){
             String publisher = intent.getString("publisherid");
-
-            SharedPreferences.Editor editor = getSharedPreferences("PREPS",MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
             editor.putString("profileid",publisher);
             editor.apply();
 
@@ -201,11 +209,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(Gloval.getState() !=null){
+            Log.d("intent","인텐트 충돌");
             fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-        }
+        }/*
+        Bundle intent = getIntent().getExtras();
+        if(intent != null){
+            String publisher = intent.getString("publisherid");
+            SharedPreferences.Editor editor = getSharedPreferences("PREFS",MODE_PRIVATE).edit();
+            editor.putString("profileid",publisher);
+            editor.apply();
+
+            fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ProfileFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }*/
     }
 }
 

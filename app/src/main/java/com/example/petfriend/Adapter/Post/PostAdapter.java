@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Activity.Post.CommentsActivity;
 import com.example.petfriend.Activity.Post.FollowersActivity;
 import com.example.petfriend.Fragment.PostDetailFragment;
@@ -50,6 +51,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     public List<Post> mPost;
 
     private FirebaseUser firebaseUser;
+
+    MainActivity mainActivity;
 
     public PostAdapter(Context mContext, List<Post> mPost) {
         this.mContext = mContext;
@@ -88,7 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.image_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREPS",Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("profileid",post.getPublisher());
                 editor.apply();
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -99,7 +102,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREPS",Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("profileid",post.getPublisher());
                 editor.apply();
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -110,7 +113,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.post_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREPS",Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("postid",post.getPostid());
                 editor.apply();
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -121,7 +124,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.publisher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREPS",Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("profileid",post.getPublisher());
                 editor.apply();
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -183,6 +186,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 intent.putExtra("id",post.getPostid());
                 intent.putExtra("title","좋아요");
                 mContext.startActivity(intent);
+                mainActivity.finish();
             }
         });
         if(!post.getPublisher().equals(firebaseUser.getUid())){

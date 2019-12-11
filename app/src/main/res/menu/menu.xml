@@ -7,7 +7,7 @@
     <item android:id="@+id/youtube"
         android:title="펫 동영상"/>
     <item android:id="@+id/news"
-            android:title="뉴스"/>
+            android:title="펫 뉴스"/>
     <item android:id="@+id/option"
             android:title="옵션"/>
 </menu>

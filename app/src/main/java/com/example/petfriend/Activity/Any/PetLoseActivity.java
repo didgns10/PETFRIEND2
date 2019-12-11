@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.example.petfriend.Activity.MainActivity;
-import com.example.petfriend.Adapter.PetLoseAdpater;
+import com.example.petfriend.Adapter.Any.PetLoseAdpater;
 import com.example.petfriend.Model.PetLose;
 import com.example.petfriend.Model.PetLoseFireDBHelper;
 import com.example.petfriend.R;

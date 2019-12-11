@@ -198,7 +198,7 @@ public class GoolgleMapActivity extends AppCompatActivity implements OnMapReadyC
                 Double longitude = latLng.longitude; // 경도
                 Log.d("current",latitude+"  "+longitude);
                 // 마커의 스니펫(간단한 텍스트) 설정
-                mOptions.snippet(latitude.toString() + ", " + longitude.toString());
+                mOptions.snippet(getCurrentAddress(latLng));
                 // LatLng: 위도 경도 쌍을 나타냄
                 mOptions.position(new LatLng(latitude, longitude));
                 // 마커(핀) 추가
@@ -355,8 +355,8 @@ public class GoolgleMapActivity extends AppCompatActivity implements OnMapReadyC
                     1);
         } catch (IOException ioException) {
             //네트워크 문제
-            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
-            return "지오코더 서비스 사용불가";
+          //  Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            return "lat="+latlng.latitude+" lon="+latlng.longitude;
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";

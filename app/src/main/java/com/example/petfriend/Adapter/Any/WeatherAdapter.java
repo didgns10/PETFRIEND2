@@ -1,4 +1,4 @@
-package com.example.petfriend.Adapter;
+package com.example.petfriend.Adapter.Any;
 
 import android.content.Context;
 import android.view.LayoutInflater;

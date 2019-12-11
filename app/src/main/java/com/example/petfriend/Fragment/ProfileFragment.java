@@ -34,6 +34,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ProfileFragment extends Fragment {
 
@@ -73,7 +76,7 @@ public class ProfileFragment extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
-        profileid = prefs.getString("profileid","none");
+        profileid = prefs.getString("profileid","");
 
         image_profile = view.findViewById(R.id.image_profile);
         options = view.findViewById(R.id.options);
@@ -142,6 +145,7 @@ public class ProfileFragment extends Fragment {
                             .child("following").child(profileid).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileid)
                             .child("followers").child(firebaseUser.getUid()).removeValue();
+                    removeNotications(profileid,firebaseUser.getUid());
                 }
             }
         });
@@ -168,6 +172,7 @@ public class ProfileFragment extends Fragment {
                 intent.putExtra("id",profileid);
                 intent.putExtra("title","팔로워");
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -178,6 +183,7 @@ public class ProfileFragment extends Fragment {
                 intent.putExtra("id",profileid);
                 intent.putExtra("title","팔로잉");
                 startActivity(intent);
+                getActivity().finish();
             }
         });
         return view;
@@ -193,7 +199,25 @@ public class ProfileFragment extends Fragment {
 
         reference.push().setValue(hashMap);
     }
+    private void removeNotications(String userid, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
 
+        Query query = reference.orderByChild("userid").equalTo(postid);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    dataSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     private void userInfo(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child(profileid);
         reference.addValueEventListener(new ValueEventListener() {

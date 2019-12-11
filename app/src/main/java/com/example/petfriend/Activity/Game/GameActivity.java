@@ -11,9 +11,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
-import com.example.petfriend.Adapter.GameAdapter;
+import com.example.petfriend.Adapter.Any.GameAdapter;
 import com.example.petfriend.Model.GameScore;
 import com.example.petfriend.R;
 import com.google.firebase.auth.FirebaseAuth;

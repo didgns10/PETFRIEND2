@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,9 @@ public class FollowersActivity extends AppCompatActivity {
     String id;
     String title;
 
+
+    public static Activity activity1;
+
     List<String> idList;
 
     RecyclerView recyclerView;
@@ -39,6 +43,8 @@ public class FollowersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followers);
+
+        activity1 = FollowersActivity.this;
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
@@ -52,6 +58,7 @@ public class FollowersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(FollowersActivity.this, MainActivity.class);
+                startActivity(intent1);
                 finish();
             }
         });

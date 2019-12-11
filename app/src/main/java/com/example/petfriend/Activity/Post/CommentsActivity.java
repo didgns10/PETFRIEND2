@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.petfriend.Activity.Idea.IdeaActivity;
+import com.example.petfriend.Activity.MainActivity;
 import com.example.petfriend.Adapter.Post.CommentAdapter;
 import com.example.petfriend.Model.Comment;
 import com.example.petfriend.Model.MemberInfo;
@@ -69,6 +70,8 @@ public class CommentsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(CommentsActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

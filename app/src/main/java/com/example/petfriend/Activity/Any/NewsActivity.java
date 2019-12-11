@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.petfriend.Activity.MainActivity;
-import com.example.petfriend.Adapter.PetNewsAdapter;
+import com.example.petfriend.Adapter.Any.PetNewsAdapter;
 import com.example.petfriend.Model.Newsdata;
 import com.example.petfriend.R;
 

@@ -38,7 +38,7 @@ public class PostDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_detail, container, false);
 
-        SharedPreferences preferences = getContext().getSharedPreferences("PREPS",Context.MODE_PRIVATE);
+        SharedPreferences preferences = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE);
         postid = preferences.getString("postid","none");
 
         recyclerView = view.findViewById(R.id.recycler_view);

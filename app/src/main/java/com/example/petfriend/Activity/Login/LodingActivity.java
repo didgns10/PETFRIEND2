@@ -45,7 +45,7 @@ public class LodingActivity extends AppCompatActivity {
     @Override
     protected  void onResume(){
         super.onResume();
-        handler.postDelayed(r,4000);
+        handler.postDelayed(r,2500);
     }
     @Override
     protected  void onPause(){

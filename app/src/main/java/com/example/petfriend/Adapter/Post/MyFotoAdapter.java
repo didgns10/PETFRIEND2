@@ -45,7 +45,7 @@ public class MyFotoAdapter extends RecyclerView.Adapter<MyFotoAdapter.ViewHolder
         holder.post_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = context.getSharedPreferences("PREPS",Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("postid",post.getPostid());
                 editor.apply();
                 ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

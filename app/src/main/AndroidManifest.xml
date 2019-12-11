@@ -26,7 +26,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="true"
             android:name=".Activity.Menu.YoutubeDetailsActivity"></activity>
-        <activity android:name=".Activity.Menu.YoutubeActivity">
+        <activity android:name=".Activity.Menu.YoutubeActivity"
+            android:launchMode="singleInstance">
         </activity>
         <activity android:name=".Activity.Map.MapsActivity" />
 
